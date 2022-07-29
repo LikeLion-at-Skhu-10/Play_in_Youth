@@ -1,3 +1,13 @@
+<h1>Bicycle 페이지</h1>
+{% if user.is_active %} 
+<p>{{user.username}}님 안녕하세요.</p>
+<a class="" href="{% url 'write' %}">글쓰기</a>
+<a class="" href="{% url 'accounts:logout' %}">로그아웃</a>
+{% else %}
+<a class="" href="{% url 'accounts:signup' %}">회원가입</a>
+{% endif %} 
+
+<hr>
 {% for posts in posts.all %}
     <i><p>{{ posts.post_date }}</p></i>
     {% if posts.image %}

@@ -1,0 +1,6 @@
+<h1>signup</h1>
+<form method="POST" action="{% url 'accounts:signup' %}">
+    {% csrf_token %} 
+    {{form.as_p}}
+    <button type="submit">가입</button>
+</form>
