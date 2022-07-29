@@ -1,0 +1,17 @@
+<form action="{% url 'update' edit_post.id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        작성자 : {{blogs.author}}
+    </div>
+    <div>
+        작성일 : <input type="date" name="edit_post.post_date">
+    </div>
+    <div>
+        업로드 사진 : <input type="file" name="post_img" id="fileupload" valud="{{edit_post.post_img}}"/>
+    </div>
+    <div>
+        내용 : <textarea name="post_content" cols="100" rows="100">{{edit_post.post_content}}</textarea>
+    </div>
+    <a href="{% url 'delete' post.id %}">삭제하기</a>
+    <button type="submit">작성 완료</button>
+</form>

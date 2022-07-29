@@ -8,7 +8,10 @@ urlpatterns = [
     path('base/', views.base, name='base'),
     path('category/', views.category, name='category'),
     path('write/', views.write, name='write'),
-    path('edit/', views.edit, name='edit'),
+    path('edit/<str:id>', views.edit, name='edit'),
+    path('update/<str:id>', views.update, name='update'),
+    path('delete/<str:id>', views.delete, name='delete'),
+
     # category_detail
     path('category_detail/gardening/', views.gardening, name='gardening'),
     path('category_detail/farming/', views.farming, name='farming'),
