@@ -6,3 +6,12 @@
 {% else %}
 <a class="" href="{% url 'accounts:signup' %}">회원가입</a>
 {% endif %} 
+
+<hr>
+{% for posts in posts.all %}
+    <i><p>{{ posts.post_date }}</p></i>
+    {% if posts.image %}
+        <img src="{{ posts.image.url }}" width="150" height="150" alt="image">
+    {% endif %}
+    <p>{{ posts.post_content }}</p>
+{% endfor %}
