@@ -1,0 +1,21 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel ="stylesheet" type="text/css" href="{% static 'accounts/css/base.css' %}">
+    <title>젊어서노세 - 비밀번호 재설정</title>
+</head>
+<body>
+    <div class="main" style="height:35em;min-height:35em;">
+        <h1 class="text">비밀번호 재설정</h1>
+        <h2 class="text2">잊어버린 비밀번호를 다시 찾는 것은 불가능합니다.<p>대신 새로운 비밀번호를 설정해서 사용하시기 바랍니다.</p></h2>
+        <div class="container">
+            <input type="password" placeholder="새로운 비밀번호를 적어주세요" class="account" autofocus>
+            <input type="password" placeholder="비밀번호를 한번 더 적어주세요" class="account">
+            <button class="button">재설정</button>
+        </div>
+    </div>   
+</body>
+</html>
