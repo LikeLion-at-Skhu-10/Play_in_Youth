@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/mypage.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/content.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/calendar.css'%}" />
+  </head>
+  <body>
+    <header>
+      <div class="logoImage">
+        <a href="#"><img src="{% static 'posts/img/becomelogo.png'%}" /></a>
+      </div>
+      <div class="header_right"><a href="#">내 정보</a> | <a href="#">로그아웃</a></div>
+    </header>
+    <content>
+      <div class="mypage_text">내 정보</div>
+      <div class="myProfile mypage_text">마광팔</div>
+      <div class="mypage_text"><span>별명</span><span>마광팔</span></div>
+      <div class="mypage_text">내가 쓴 글</div>
+
+      <!--여기서부터 달력임-->
+      <div class="calendar">
+        <div class="calendar_header">
+          <div class="year-month"></div>
+          <div class="nav">
+            <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
+            <button class="nav-btn go-today" onclick="goToday()">Today</button>
+            <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
+          </div>
+        </div>
+        <div class="main">
+          <div class="days">
+            <div class="day">일</div>
+            <div class="day">월</div>
+            <div class="day">화</div>
+            <div class="day">수</div>
+            <div class="day">목</div>
+            <div class="day">금</div>
+            <div class="day">토</div>
+          </div>
+          <div class="dates"></div>
+        </div>
+      </div>
+    </content>
+    <script type="text/javascript" src="{% static 'accounts/js/index.js' %}"></script>
+  </body>
+</html>
