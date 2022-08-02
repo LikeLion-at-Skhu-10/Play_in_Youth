@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+header {
+  height: 3.5em;
+  background-color: #eff7fc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: fit-content;
+  box-shadow: 0.1em 0.1em 0.3em gray;
+}
+header :first-child {
+  margin-left: 1em;
+}
+header :nth-child(3) {
+  margin-right: 1em;
+  min-width: fit-content;
+}
+img {
+  width: 5.5em;
+}
+a:link,
+a:visited,
+a:active {
+  color: black;
+  text-decoration: none;
+}
+
+.header_right {
+  margin-right: 1em;
+}
