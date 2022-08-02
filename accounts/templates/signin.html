@@ -1,0 +1,21 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel ="stylesheet" type="text/css" href="{% static 'accounts/css/base.css' %}">
+    <title>젊어서노세 - 로그인</title>
+</head>
+<body>
+    <div class="main" style="height:30em;min-height:30em;">
+        <h1 class="text">로그인</h1>
+        <div class="container">
+            <input type="nickname" placeholder="별명을 적어주세요" class="account" autofocus>
+            <input type="password" placeholder="비밀번호를 적어주세요" class="account">
+            <center><a href="#" class="find">별명 찾기</a> | <a href="#" class="find">비밀번호 찾기</a></center>
+            <button class="button">로그인</button>
+        </div>
+    </div>   
+</body>
+</html>
