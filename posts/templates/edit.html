@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>젊어서노세</title>
+    <style>
+body {
+    display:inline-block;
+    justify-content: center;
+    align-items: center;
+    margin: 100px;
+    padding:100px;
+}
+
+li{
+    float:left;
+    padding: 3px;
+}
+
+a{
+    text-decoration: none; 
+}
+
+#PhotoBox{
+    display: block;
+    background-color: white;
+    height: 400px;
+    width: 300px;
+    margin:30px;
+    padding:10px;
+    text-align:center;
+    border-radius: 5%;
+    box-shadow:  0 4px 4px -4px rgb(193,193,193);
+    }
+
+    #PlusContent{
+    display: inline-block;
+    background-color: white;
+    height: 200px;
+    width: 400px;
+    margin-top: 40px;
+    }
+
+h3{
+    text-align: center;
+}
+
+ul{
+    list-style-type: none;
+}
+
+button {
+    background-Color:#5699D6;
+    border-radius:5px;
+    color: white;
+    border:0;
+    outline:0;
+    margin-right:10px;
+}
+
+input[type=text] {
+    border:0;
+    outline:0;
+}
+
+
+#Box {
+    background-color: whitesmoke;
+    display:inline-block;
+    align-items: inline-block;
+    height: 520px;
+    width: 820px;
+    }
+
+    input::placeholder {
+    font-size: 17px;
+    padding:0px;
+    margin:0px;
+
+}
+
+    </style>
+</head>
+<body>
+    <ul>
+        <h3>글 수정</h3>
+        <div id="Box">
+            <div id="PhotoBox">
+                <img src=""><br>
+            </div>
+            <div id="PlusContent">
+                <input type="text" placeholder="내용 추가">
+            </div>
+            <button type="submit"style="float:right";> 작성완료 </button>
+        </div>
+
+    </ul>
+</body>
+</html>
