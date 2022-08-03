@@ -1,0 +1,8 @@
+<h1>로그인</h1>
+<hr>
+<form method="POST" action="{% url 'signin' %}">
+    {% csrf_token %} 
+    별명 : {{form.username}}<br>
+    비번 : {{form.password}}<br>
+    <button type="submit">로그인</button>
+</form>

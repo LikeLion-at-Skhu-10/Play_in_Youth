@@ -1,0 +1,9 @@
+<h1>Bicycle 페이지</h1>
+{% if user.is_active %} 
+    <p>{{user.username}}님 안녕하세요.</p>
+    <a class="" href="{% url 'write' %}">글쓰기</a>
+    <a class="" href="{% url 'logout' %}">로그아웃</a>
+{% else %}
+    <a class="" href="{% url 'signup' %}">회원가입</a>
+    <a class="" href="{% url 'signin' %}">로그인</a>
+{% endif %} 
