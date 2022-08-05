@@ -54,8 +54,8 @@ body {
     margin: auto;
     justify-content: center;
     align-items: center;
-    width: 7em;
-    height: 3vh;
+    width: 9em;
+    height: 4vh;
     background-color: black;
     color: white;
     border-radius: 2em;
@@ -65,4 +65,16 @@ body {
 input::placeholder {
     font-size: 1.3em;
     font-weight: 600;
+}
+
+input:focus {outline: none;}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: blue;
+    text-decoration: none;
 }
