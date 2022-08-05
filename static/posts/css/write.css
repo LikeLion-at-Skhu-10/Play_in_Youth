@@ -1,0 +1,78 @@
+body {
+    display:inline-block;
+    justify-content: center;
+    align-items: center;
+    margin: 100px;
+    padding:100px;
+}
+
+li{
+    float:left;
+    padding: 3px;
+}
+
+a{
+    text-decoration: none; 
+}
+
+#PhotoPlusBox{
+    border:2px dashed black;
+    display: inline-block;
+    background-color: white;
+    height: 400px;
+    width: 300px;
+    margin:30px;
+    text-align:center;
+}
+
+#PlusContent{
+    display: inline-block;
+    background-color: white;
+    height: 200px;
+    width: 400px;
+    margin-top: 40px;
+
+    }
+
+h3{
+    text-align: center;
+}
+
+ul{
+    list-style-type: none;
+}
+
+button {
+    background-Color:#5699D6;
+    border-radius:5px;
+    color: white;
+    border:0;
+    outline:0;
+    margin-right:10px;
+}
+
+input[type=text] {
+    border:0;
+    outline:0;
+}
+
+
+#Box {
+    background-color: whitesmoke;
+    display:inline-block;
+    align-items: inline-block;  
+    height: 520px;
+    width: 820px;
+    }
+
+    input::placeholder {
+    font-size: 17px;
+    padding:20px;
+    margin-top:80px;
+    padding: 10px;
+
+}
+
+p{
+    color:grey
+}
