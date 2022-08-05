@@ -1,3 +1,4 @@
+<style>
 body {
     display:inline-block;
     justify-content: center;
@@ -16,22 +17,22 @@ a{
 }
 
 #PhotoPlusBox{
-    border:4px dashed black;
-    display: block;
+    border:2px dashed black;
+    display: inline-block;
     background-color: white;
-    height: 500px;
+    height: 400px;
     width: 300px;
     margin:30px;
-    padding:10px;
     text-align:center;
-    }
+}
 
 #PlusContent{
-    border:1px solid black;
-    display: block;
+    display: inline-block;
     background-color: white;
-    height: 300px;
+    height: 200px;
     width: 400px;
+    margin-top: 40px;
+
     }
 
 h3{
@@ -42,12 +43,13 @@ ul{
     list-style-type: none;
 }
 
-input[type=submit] {
+button {
     background-Color:#5699D6;
-    border-radius:10px;
+    border-radius:5px;
     color: white;
     border:0;
     outline:0;
+    margin-right:10px;
 }
 
 input[type=text] {
@@ -59,7 +61,19 @@ input[type=text] {
 #Box {
     background-color: whitesmoke;
     display:inline-block;
-    align-items: inline-block;
-    height: 590px;
+    align-items: inline-block;  
+    height: 520px;
     width: 820px;
     }
+
+    input::placeholder {
+    font-size: 17px;
+    padding:20px;
+    margin-top:80px;
+    padding: 10px;
+
+}
+
+p{
+    color:grey
+}
