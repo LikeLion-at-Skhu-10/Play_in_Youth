@@ -6,9 +6,9 @@ function knowSizefunc(event) {
   const myProfile = document.createElement('div');
   const myPosting = document.createElement('div');
   const plustButton = document.createElement('button');
-  const figureElement = event.target.parentElement;
-  const eleWidth = event.target.width;
-  const eleHeight = event.target.height;
+  const figureElement = event.target;
+  const eleWidth = event.toElement.offsetWidth;
+  const eleHeight = event.toElement.offsetHeight;
 
   //appendChild하는 부분
   figureElement.appendChild(HideBar);
@@ -21,7 +21,6 @@ function knowSizefunc(event) {
   myProfile.classList.add('myProfile');
   myPosting.classList.add('myPosting');
   plustButton.classList.add('plustButton');
-
   //스타일의 속성 바꾸는 부분
   HideBar.style.width = eleWidth + `px`;
   HideBar.style.height = eleHeight + `px`;
@@ -30,13 +29,22 @@ function knowSizefunc(event) {
   plustButton.innerHTML = '더보기';
 }
 
+function wait(sec) {
+  let start = Date.now(),
+    now = start;
+  while (now - start < sec * 1000) {
+    now = Date.now();
+  }
+}
+
 //마우스 out됐을때
 function removeElefunc(event) {
   const removeEle = document.querySelector('figure :nth-child(2)');
+  wait(0.05);
   removeEle.remove();
 }
 //모든 imgs에 addEventListener해주기.
 for (let i = 0; i < figureEle.length; i++) {
-  figureEle[i].addEventListener('mouseover', knowSizefunc);
-  figureEle[i].addEventListener('mouseout', removeElefunc);
+  figureEle[i].addEventListener('mouseenter', knowSizefunc);
+  figureEle[i].addEventListener('mouseleave', removeElefunc);
 }
