@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .forms import UserForm
 from .models import User
 
@@ -8,18 +8,26 @@ from .models import User
 def signup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
-
-
-
         if form.is_valid():
-
             user = form.save()
             auth.login(request, user)
             return redirect('bicycle')
         else:
-            # 회원가입 중복체크.. 아직 미완성
+            ## 별명 중복체크
+            name = request.POST['username']
+            try:
+                _id = User.objects.get(username=name)
+            except:
+                _id = None
+            if _id is None:
+                duplicate = "사용 가능한 별명"
+            else:
+                duplicate = "이미 존재하는 별명"
+            ## 비밀번호 확인
+            if request.POST['password1']!=request.POST['password2']:
+                error_password = UserCreationForm.error_messages['password_mismatch']
             context = {
-                'msg' : "회원가입 실패. 이유 : 1)별명 중복 2)비번 형식 틀림 3)빈 입력 존재",
+                'error_username' : duplicate,
                 'form' : form
             }
             return render(request, 'signup.html', context)
