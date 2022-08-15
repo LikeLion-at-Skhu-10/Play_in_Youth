@@ -1,0 +1,27 @@
+<form method="POST" action="{% url 'update' edit_post.id %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- <div>
+        작성자 : {{user.username}}
+    </div>
+    <div>
+        작성일 : <input type="date" name="edit_post.post_date">
+    </div>
+    <div>
+        업로드 사진 : <input type="file" name="post_img" id="fileupload" value="{{edit_post.post_img}}"/>
+    </div>
+    <div>
+        내용 : <textarea name="post_content" cols="80" rows="30">{{edit_post.post_content}}</textarea>
+    </div> -->
+
+    <div>
+        작성자 : {{user.username}}
+    </div>
+    <div>
+        업로드 사진 : <input type="file" name="post_img" id="fileupload" />
+    </div>
+    <div>
+        내용 : <textarea name="post_content" cols="70" rows="30">{{edit_post.post_content}}</textarea>
+    </div>
+    <button type="submit">작성 완료</button>
+
+</form>

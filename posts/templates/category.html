@@ -1,0 +1,19 @@
+<h1>category</h1>
+
+{% for cate in cates %}
+    <button type="button"><a href="{% url 'cate_detail' cate.id %}">{{cate.post_cate}}</a></button>
+    <br>
+{% endfor %} 
+
+<!-- <form method="post" action=""{% url 'cate_detail' }>
+    {% csrf_token %}
+    <input type="submit" name="cate" value="낚시">
+    <input type="submit" name="cate" value="농사">
+    <input type="submit" name="cate" value="등산">
+    <input type="submit" name="cate" value="뜨개질">
+    <input type="submit" name="cate" value="바둑">
+    <input type="submit" name="cate" value="요가">
+    <input type="submit" name="cate" value="요리">
+    <input type="submit" name="cate" value="원예">
+    <input type="submit" name="cate" value="자전거">
+</form> -->

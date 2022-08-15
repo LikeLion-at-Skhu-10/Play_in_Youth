@@ -1,0 +1,71 @@
+{% load static %} 
+<h1>{{posts.post_cate}} 페이지</h1> <!--수정필요-->
+
+{% if user.is_active %} 
+<p>{{user.username}}님 안녕하세요.</p>
+<a href="{% url 'get_write' %}">글쓰기</a>
+<a href="{% url 'mypage' user.username %}">내 정보</a>
+<a href="{% url 'logout' %}">로그아웃</a>
+{% else %}
+<a href="{% url 'signup' %}">회원가입</a>
+<a href="{% url 'signin' %}">로그인</a>
+{% endif %} 
+<hr>
+
+<button type="button"><a href="{% url 'category' %}">뒤로가기</a></button>
+
+{% for post in posts %} 
+    {% if post.post_img %} 
+    <!-- 이미지 있는 글인 경우 -->
+        <div">
+            <!-- 오리지널 화면 -->
+            <h1>/*오리지널 화면*/</h1>
+            <img src="{{post.post_img.url}}" width="100" height="100" alt="image">
+
+            <!-- 이미지에 마우스 올릴때 -->
+            <div style="background-color: gray;"><p>/*마우스 올릴때 화면*/</p>
+                <p>작성자 : {{post.author}} || 작성일 : {{post.post_date}}</p>
+                <p>{{post.post_content}}</p>
+                <button type="button"><a href="{% url 'cate_detail_modal' post.id %}">더보기</a></button>
+            </div>
+
+            <!-- 모달 -->
+            <div style="background-color: skyblue;"><p>/*모달 화면*/</p>
+                <img src="{{post.post_img.url}}" width="100" height="100" alt="image">
+
+                <!-- <p>댓글</p> -->
+                <form method="post" action="{% url 'cate_detail_modal' post.id %}">
+                    {% csrf_token %} 
+                    댓글 : {{cmt_form.as_p}} <input type="submit" value="완료">
+                </form>
+                {% for cmt in cmts %} 
+                    <p>{{cmt.author}} : {{cmt}}</p>
+                {% endfor %} 
+                <p>좋아요</p>
+            </div>
+        </div>
+    {% else %} 
+    <!-- 이미지 없는 글인 경우 -->
+        <div">
+            <!-- 오리지널 화면 -->
+            <h1>/*오리지널 화면*/</h1>
+            <p>{{post.post_content}}</p>
+
+            <!-- 이미지에 마우스 올릴때 -->
+            <div style="background-color: gray;"><p>/*마우스 올릴때 화면*/</p>
+                <p>작성자 : {{post.author}} || 작성일 : {{post.post_date}}</p>
+                <p>{{post.post_content}}</p>
+                <button type="button"><a href="">더보기</a></button>
+            </div>
+
+            <!-- 모달 -->
+            <div style="background-color: skyblue;"><p>/*모달 화면*/</p>
+                <img src="{% static 'posts/img/post_default.png' %}" width="100" height="100" alt="image">
+                <p>{{post.post_content}}</p>
+                <p>댓글</p>
+                <p>좋아요</p>
+            </div>
+        </div>
+    {% endif %} 
+    <hr>
+{% endfor %} 

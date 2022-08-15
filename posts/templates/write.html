@@ -1,0 +1,21 @@
+<form method="POST" action="{% url 'write' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        작성자 : {{user.username}}
+    </div>
+    <div>
+        업로드 사진 : <input type="file" name="post_img" id="fileupload" />
+    </div>
+    <div>
+        내용 : <textarea name="post_content" cols="70" rows="30"></textarea>
+    </div>
+    <div>
+        카테고리 : 
+    <select class="select" name="post_cate"> <!--option에 value를 지정해주니까 값을 none으로 받아옴. select에 해줘야 함.-->
+        {% for cate in post_cate %}
+            <option value="{{cate.id}}">{{cate}}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <button type="submit">작성 완료</button>
+</form>
