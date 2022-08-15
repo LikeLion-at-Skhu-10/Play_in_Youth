@@ -1,0 +1,81 @@
+.content_bar {
+  width: 80%;
+  display: flex;
+  margin: 1em auto;
+  justify-content: space-between;
+  margin-top: 5vw;
+}
+
+.content_bar :nth-child(2) {
+  font-size: 1.5em;
+}
+
+.content_bar > button {
+  width: 5em;
+  height: 2.6em;
+  border: none;
+  color: white;
+  background-color: #559ad6;
+  border-radius: 0.6em;
+}
+
+.content_imgs {
+  width: 80vw;
+  margin: auto;
+  column-width: 13em;
+}
+
+.content_imgs figure {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0.1em 0.1em 0.4em lightgray;
+  border-radius: 1em;
+  margin-bottom: 1em;
+}
+
+.content_imgs figure img {
+  width: 100%;
+}
+
+/*해당 요소에 마우스를 올렸을 때 그 요소가 움직이는게 아니라 다른 요소가 움직임.*/
+
+/*classList한 부분*/
+.hideBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  z-index: 10000;
+}
+
+.myProfile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 100000em;
+  background-color: lightgreen;
+}
+
+.myPosting {
+  font-size: 1em;
+  height: 1em;
+  color: white;
+}
+
+.plustButton {
+  border: none;
+  background-color: #559ad6;
+  border-radius: 0.2em;
+  width: 4em;
+  height: 2em;
+  color: white;
+  cursor: pointer;
+}

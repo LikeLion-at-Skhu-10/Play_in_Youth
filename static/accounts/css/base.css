@@ -1,0 +1,80 @@
+body {
+    background-color: #EFF7FC;
+    display: flex;
+    height: 100vh;
+}
+
+.main {
+    margin: auto;
+    width: 40em;
+    min-width: 40em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 0.1em solid lightgrey;
+    border-radius: 1em;
+    background-color: #f1f1f1;
+}
+
+.text {
+    font-size: 2.5em;
+    margin-top: 1.5em;
+}
+
+.text2 {
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.account {
+    display: block;
+    margin-bottom: 1em;
+    text-indent: 1em;
+    border: 0.1em solid lightgray;
+    width: 26em;
+    min-width : 26em;
+    height: 3.5em;
+    min-height: 3.5em;
+}
+
+.select {
+    display: block;
+    margin-bottom: 1em;
+    text-indent: 1em;
+    border: 0.1em solid lightgray;
+    width: 26.5em;
+    min-width: 26.5em;
+    height: 3.8em;
+    min-height: 3.8em
+}
+
+.button {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    width: 9em;
+    height: 4vh;
+    background-color: black;
+    color: white;
+    border-radius: 2em;
+    margin-top: 3em;
+}
+
+input::placeholder {
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+input:focus {outline: none;}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: blue;
+    text-decoration: none;
+}

@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/category.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/categoryContent.css'%}" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <header>
+      <div class="logoImage">
+        <a href="#"><img src="{% static 'posts/img/becomelogo.png'%}" /></a>
+      </div>
+      <div class="finder">
+        <input placeholder="검색" />
+        <button class="finder_button">검색</button>
+      </div>
+      <div class="header_right"><a href="#">내 정보</a> | <a href="#">로그아웃</a></div>
+    </header>
+
+    <!-- 여기서부터는 mansory layout-->
+    <content>
+      <div class="content_bar">
+        <button>내 정보</button>
+        <div>#농사</div>
+        <button>글작성</button>
+      </div>
+      <div class="content_imgs">
+        <figure>
+          <img src="{% static 'posts/img/img01.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img02.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img03.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img04.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img05.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img07.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img08.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img09.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img10.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img11.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img12.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img13.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img14.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img15.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img16.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img17.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img18.jpg'%}" />
+        </figure>
+        <figure>
+          <img src="{% static 'posts/img/img15.jpg'%}" />
+        </figure>
+      </div>
+    </content>
+    <script src="{% static 'posts/js/mansonry.js'%}"></script>
+  </body>
+</html>
