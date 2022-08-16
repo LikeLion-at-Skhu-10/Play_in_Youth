@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
@@ -11,37 +12,89 @@ from django.contrib.auth.decorators import login_required
 def base(request):
     return render(request, 'base.html')
 
+def test(request):
+    post = Post.objects.get(author=5)
+    post_id = post.post_id
+    cmts = Comment.objects.filter(post_id=post_id)
+    if request.method == 'POST':
+        cmt_form = CommentForm(request.POST)
+        if cmt_form.is_valid():
+            comment = cmt_form.save(commit=False)
+            comment.post_id = post
+            comment.post_content = cmt_form.cleaned_data['comment_content']
+            comment.author = request.user
+            comment.comment_date = timezone.now()
+            comment.save()
+            
+            return redirect('test')
+    else:
+        cmt_form = CommentForm()
+        context = {
+            'post':post,
+            'cmt_form':cmt_form,
+            'cmts':cmts
+        }
+        return render(request, 'test.html', context)
+
 def main(request):
     return render(request, 'main.html')
 
-def cate_detail(request, id):
-    '''카테고리 디테일'''
+
+def cate_detail(request, cate_id):
+    '''
+    카테고리 디테일
+    1) 작성자가 같아야 함
+    2) 카테고리가 같아야 함
+    3) 글 내용이 같아야 함
+    4) 글 아이디가 같아야 함 ✔
+    '''
+
+    # 해당 카테고리 글 다 가져오기
     # posts = get_object_or_404(Category, id=id) #이렇게 하면 html에서 반복을 못함
-    posts = Post.objects.filter(post_cate=id)
-    return render(request, 'category_detail.html', {'posts':posts})
-    
-def cate_detail_modal(request, id):
+    posts = Post.objects.filter(post_cate=cate_id)
+
+    # 각 글의 content, comment, img, author, date 가져오기(모달부분)
+
+    context = {
+        'posts':posts,
+    }
+    return render(request, 'category_detail.html', context)
+
+'''
+1. 해당 카테고리 글 다 가져옴
+1-2. cate_detail에 글 보이기
+2. 더보기를 누르면 comment view 실행
+2-2. 각 글에 해당하는 댓글 다 가져옴 (Post id==Comment id)
+3. 닫기를 누르면 댓글 사라짐.
+'''
+
+def cate_detail_comment(request, cate_id, post_id):
+    posts = Post.objects.filter(post_cate=cate_id)
+    post = get_object_or_404(Post, pk=post_id)
+    # cate_id = post.post_cate
+    # print('cate_id 잘 가져 오고 있느냐 :: ', cate_id)
+    # posts = Post.objects.filter(post_cate=cate_id)
+    cmts = Comment.objects.filter(post_id=post_id)
     '''댓글'''
-    post = get_object_or_404(Post, id=id)
-    cmts = Comment.objects.filter(post_id=id)
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.author = request.user
-            comment.post_id = post
-            comment.comment_content = comment_form.cleaned_data['cmt_content']
+            comment.post_id = request.post_id
+            comment.comment_content = comment_form.cleaned_data['comment_content']
             comment.comment_date = timezone.now()
             comment.save()
-            return redirect('cate_detail', id)
+            return redirect('cate_detail')
     else:
         comment_form = CommentForm()
         context = {
+            'posts':posts,
             'post':post,
-            'cmts':cmts,
-            'cmt_form':comment_form
+            'cmt_form':comment_form,
+            'cmts':cmts
         }
-        return redirect('cate_detail', context)
+        return render('category_detail.html', context)
 
 def category(request):
     '''카테고리 육각형 모음'''
@@ -112,9 +165,8 @@ def likes(request, id):
     return redirect('/posts/category_detail/category/' + str(id))
 
 # category_detail
-def gardening(request, gardening):
-    category = Post.objects.filter(category=gardening)
-    return render(request, 'category_detail/gardening.html', {'category':category})
+def gardening(request):
+    return render(request, 'category_detail/gardening.html')
 
 def farming(request, farming):
     category = Post.objects.filter(category=farming)

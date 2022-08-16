@@ -6,9 +6,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.main, name='main'),
     path('base/', views.base, name='base'),
+    path('test/', views.test, name='test'),
     path('category/', views.category, name='category'),
-    path('category/<str:id>/', views.cate_detail, name='cate_detail'),
-    path('category/<str:id>/cate_detail_modal/', views.cate_detail, name='cate_detail_modal'),
+    path('category/<str:cate_id>/', views.cate_detail, name='cate_detail'),
+    path('category/<str:cate_id>/<str:post_id>/', views.cate_detail_comment, name='cate_detail_comment'),
     path('get_write/', views.get_write, name='get_write'),
     path('write/', views.write, name='write'),
     path('edit/<str:id>/', views.edit, name='edit'),

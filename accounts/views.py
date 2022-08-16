@@ -74,7 +74,11 @@ def mypage(request, name):
     '''
     user = User.objects.get(username=name) 
     post = Post.objects.filter(author=user)
-    return render(request, 'mypage.html', {'post':post})
+    context = {
+        'post':post,
+        'user':user
+    }
+    return render(request, 'mypage.html', context)
 
 def detail(request, id):
     post = get_object_or_404(Post,id=id)
