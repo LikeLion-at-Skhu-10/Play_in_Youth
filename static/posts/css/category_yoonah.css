@@ -1,1 +1,72 @@
 body {background-color: rgb(121 172 108);}
+body{
+    padding:0;
+    margin: 0;
+}
+
+.hexagon {
+    width: 100px;
+    height: 55px;
+    background: white;
+    position: relative;
+  }
+  .hexagon:before {
+    content: "";
+    position: absolute;
+    top: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 25px solid white;
+  }
+  .hexagon:after {
+    content: "";
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 25px solid white;
+  }
+
+  .hexagon_css{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #flex_style{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .grid_style{
+    grid-template-rows: repeat(2,180px);
+    display: grid;
+    margin:1em;
+  }
+  .grid_style:nth-child(2),.grid_style:nth-child(4){
+    margin:8em 1em 1em 1em;
+  }
+a{
+    text-decoration: none;
+}
+
+a:link{
+    color:black;
+}
+
+a:hover {
+    color : black;
+  }
+
+a:active {
+    color : black;
+  }
