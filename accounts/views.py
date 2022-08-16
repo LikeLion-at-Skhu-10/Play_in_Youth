@@ -63,12 +63,6 @@ def find_name(request):
 def reset_pw(request):
     return render(request, 'reset_pw.html')
 
-<<<<<<< HEAD
-def mypage(request, id):
-    if request.method == 'GET':
-        post = Post.objects.filter(author=id)
-        print(post)
-=======
 def mypage(request, name):
     '''
     url에 user id가 아닌 username이 뜨게 하고 싶었다.
@@ -78,9 +72,9 @@ def mypage(request, name):
     그래서 진짜 User에서 가져오기로 했다
     User.objects.get(username=name) 정보를 user에 담고 그것으로 Post를 filter하니 잘 되었다.
     '''
-    user = User.objects.get(username=name) 
-    post = Post.objects.filter(author=user)
->>>>>>> 40f5ef22dd5d75dcccfceba63422db710a71628f
+    if request.method == 'GET':
+        post = Post.objects.filter(author=name)
+        print(post)
     return render(request, 'mypage.html', {'post':post})
 
 def detail(request, id):
@@ -92,11 +86,7 @@ def update(request, id):
     if request.method == "POST":
         update_post.post_date = timezone.localtime()
         update_post.post_content = request.POST['post_content']
-<<<<<<< HEAD
-        update_post.post_img = request.FILES.get('post_image')
-=======
         update_post.post_img = request.FILES.get('post_image', False)
->>>>>>> 40f5ef22dd5d75dcccfceba63422db710a71628f
         update_post.save()
         return render(request, 'mypage.html')
     else:

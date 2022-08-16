@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-<form method="POST" action="{% url 'write' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div>
-        작성자 : {{user.username}}
-    </div>
-    <div>
-        업로드 사진 : <input type="file" name="post_img" id="fileupload" />
-    </div>
-    <div>
-        내용 : <textarea name="post_content" cols="70" rows="30"></textarea>
-    </div>
-    
-    <button type="submit">작성 완료</button>
-</form>
-=======
 {% load static %}
 
 <!DOCTYPE html>
@@ -146,5 +130,3 @@ p{
     </form>
 </body>
 </html>
-
->>>>>>> 40f5ef22dd5d75dcccfceba63422db710a71628f

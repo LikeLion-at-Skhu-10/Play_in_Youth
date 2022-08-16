@@ -1,10 +1,15 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <h1>Bicycle 페이지</h1>
 <form action="{% url 'bicycle' %}" method="POST">
 =======
 <h1>{{cate}} 페이지</h1>
 <form action="" method="POST">
 >>>>>>> 40f5ef22dd5d75dcccfceba63422db710a71628f
+=======
+<h1>{{cate}} 페이지</h1>
+<form action="" method="POST">
+>>>>>>> 419ea6906cf274670ef9dc9743ede0df2b23d464
     {% csrf_token %} 
 
     {% if user.is_active %} 
@@ -18,12 +23,17 @@
     <hr>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     {% if category_posts %}
         <a href="{% url 'likes' post.id %}">
 =======
     <!-- {% if category_posts %}
         <a href="{% url 'likes' posts.id %}">
 >>>>>>> 40f5ef22dd5d75dcccfceba63422db710a71628f
+=======
+    <!-- {% if category_posts %}
+        <a href="{% url 'likes' posts.id %}">
+>>>>>>> 419ea6906cf274670ef9dc9743ede0df2b23d464
             {% if user in post.like.all %}
                 취소
             {% else %}
@@ -39,9 +49,12 @@
         아직 업로드된 글이 없습니다.
         
 <<<<<<< HEAD
+<<<<<<< HEAD
     {% endif %}
 
 =======
+=======
+>>>>>>> 419ea6906cf274670ef9dc9743ede0df2b23d464
     {% endif %} -->
 
     <!-- 모달 전 핀터레스트 화면 -->
@@ -54,5 +67,8 @@
         {% endif %} 
         <hr>
     {% endfor %} 
+<<<<<<< HEAD
 >>>>>>> 40f5ef22dd5d75dcccfceba63422db710a71628f
+=======
+>>>>>>> 419ea6906cf274670ef9dc9743ede0df2b23d464
 </form>
