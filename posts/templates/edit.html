@@ -1,0 +1,151 @@
+<<<<<<< HEAD
+<form method="POST" action="{% url 'edit' user.id %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        작성자 : {{user.username}}
+    </div>
+    <div>
+        업로드 사진 : <input type="file" name="post_img" id="fileupload" value="{{edit_post.post_img}}"/>
+    </div>
+    <div>
+        내용 : <textarea name="post_content" cols="80" rows="30">{{edit_post.post_content}}</textarea>
+    </div>
+
+    <button type="submit" value="submit">작성 완료</button>
+</form>
+=======
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>젊어서노세</title>
+         <link rel="stylesheet" type="text/css" href="{% static 'posts/css/#.css' %}">
+        <style>
+            body {
+                display:inline-block;
+                justify-content: center;
+                align-items: center;
+                margin: 100px;
+                padding:100px;
+            }
+
+            li{
+                float:left;
+                padding: 3px;
+            }
+
+            a{
+                text-decoration: none; 
+            }
+
+            #PhotoBox{
+                display: block;
+                background-color: white;
+                height: 400px;
+                width: 300px;
+                margin:30px;
+                padding:10px;
+                text-align:center;
+                border-radius: 5%;
+                box-shadow:  0 4px 4px -4px rgb(193,193,193);
+                position: relative;
+            }
+
+            #PlusContent{
+                position: relative;
+                display: inline-block;
+                background-color: white;
+                height: 200px;
+                width: 400px;
+                margin-top: 40px;
+                bottom:20em;
+                left: 25em;
+            }
+
+            h3{
+                text-align: center;
+            }
+
+            ul{
+                list-style-type: none;
+            }
+
+            button {
+                background-Color:#5699D6;
+                border-radius:5px;
+                color: white;
+                border:0;
+                outline:0;
+                margin-right:10px;
+            }
+
+            input[type=text] {
+                border:0;
+                outline:0;
+            }
+
+
+            #Box {
+                background-color: whitesmoke;
+                display:inline-block;
+                align-items: inline-block;
+                height: 520px;
+                width: 820px;
+                }
+
+            input::placeholder {
+                font-size: 17px;
+                padding:0px;
+                margin:0px;
+
+            }
+
+        </style>
+    </head>
+    <body>
+        <ul>
+            <h3>글 수정</h3>
+            <div id="Box">
+                <div id="PhotoBox">
+                    <img src=""><br>
+                </div>
+                <div id="PlusContent">
+                    <input type="text" placeholder="내용 추가">
+                </div>
+                <button type="submit"style="float:right";> 작성완료 </button>
+            </div>
+        </ul>
+
+        <!-- 0815/백엔드 추가 -->
+
+        <form method="POST" action="{% url 'update' edit_post.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- <div>
+                작성자 : {{user.username}}
+            </div>
+            <div>
+                작성일 : <input type="date" name="edit_post.post_date">
+            </div>
+            <div>
+                업로드 사진 : <input type="file" name="post_img" id="fileupload" value="{{edit_post.post_img}}"/>
+            </div>
+            <div>
+                내용 : <textarea name="post_content" cols="80" rows="30">{{edit_post.post_content}}</textarea>
+            </div> -->
+        
+            <div>
+                작성자 : {{user.username}}
+            </div>
+            <div>
+                업로드 사진 : <input type="file" name="post_img" id="fileupload" />
+            </div>
+            <div>
+                내용 : <textarea name="post_content" cols="70" rows="30">{{edit_post.post_content}}</textarea>
+            </div>
+            <button type="submit">작성 완료</button>
+        
+        </form>
+    </body>
+</html>
+>>>>>>> 40f5ef22dd5d75dcccfceba63422db710a71628f

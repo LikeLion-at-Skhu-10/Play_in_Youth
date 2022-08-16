@@ -1,9 +1,58 @@
+<<<<<<< HEAD
 <h1>Bicycle 페이지</h1>
-{% if user.is_active %} 
-    <p>{{user.username}}님 안녕하세요.</p>
-    <a class="" href="{% url 'write' %}">글쓰기</a>
-    <a class="" href="{% url 'logout' %}">로그아웃</a>
-{% else %}
-    <a class="" href="{% url 'signup' %}">회원가입</a>
-    <a class="" href="{% url 'signin' %}">로그인</a>
-{% endif %} 
+<form action="{% url 'bicycle' %}" method="POST">
+=======
+<h1>{{cate}} 페이지</h1>
+<form action="" method="POST">
+>>>>>>> 40f5ef22dd5d75dcccfceba63422db710a71628f
+    {% csrf_token %} 
+
+    {% if user.is_active %} 
+        <p>{{user.username}}님 안녕하세요.</p>
+        <a href="{% url 'write' %}">글쓰기</a>
+        <a href="{% url 'logout' %}">로그아웃</a>
+    {% else %}
+        <a href="{% url 'signup' %}">회원가입</a>
+        <a href="{% url 'signin' %}">로그인</a>
+    {% endif %} 
+    <hr>
+
+<<<<<<< HEAD
+    {% if category_posts %}
+        <a href="{% url 'likes' post.id %}">
+=======
+    <!-- {% if category_posts %}
+        <a href="{% url 'likes' posts.id %}">
+>>>>>>> 40f5ef22dd5d75dcccfceba63422db710a71628f
+            {% if user in post.like.all %}
+                취소
+            {% else %}
+                좋아요 
+            {% endif %}
+        </a>
+
+        <img src="{{ posts.image.url }}" alt="image">
+        <div>좋아요 수 : {{post.like_count}}</div>
+
+    {% else %} 
+
+        아직 업로드된 글이 없습니다.
+        
+<<<<<<< HEAD
+    {% endif %}
+
+=======
+    {% endif %} -->
+
+    <!-- 모달 전 핀터레스트 화면 -->
+    {% for post in posts %} 
+        {% if post.post_img %} 
+            <p>작성자 : {{post.author}} || 작성일 : {{post.post_date}}</p>
+            <img src="{{post.post_img.url}}" width="100" height="100" alt="image">
+        {% else %} 
+            <p>{{post.post_content}}</p>
+        {% endif %} 
+        <hr>
+    {% endfor %} 
+>>>>>>> 40f5ef22dd5d75dcccfceba63422db710a71628f
+</form>
