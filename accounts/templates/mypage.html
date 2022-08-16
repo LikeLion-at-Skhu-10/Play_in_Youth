@@ -63,6 +63,8 @@
                 <p>내용 : {{post.post_content}}</p>
                 <p>날짜 : {{post.post_date}}</p>
                 <div>좋아요 수 : {{post.like_count}}</div>
+                
+                <a href="{% url 'edit' post.post_id %}">수정하기</a>
                 <hr>
             {% endfor %}
     

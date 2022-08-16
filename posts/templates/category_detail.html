@@ -4,7 +4,7 @@
 {% if user.is_active %} 
 <p>{{user.username}}님 안녕하세요.</p>
 <a href="{% url 'get_write' %}">글쓰기</a>
-<a href="{% url 'mypage' user.username %}">내 정보</a>
+<a href="{% url 'mypage' user.id %}">내 정보</a>
 <a href="{% url 'logout' %}">로그아웃</a>
 {% else %}
 <a href="{% url 'signup' %}">회원가입</a>
@@ -34,10 +34,14 @@
                 <img src="{{post.post_img.url}}" width="100" height="100" alt="image">
 
                 <!-- <p>댓글</p> -->
-                <form method="post" action="">
-                    {% csrf_token %} 
-                    댓글 : {{cmt_form}} <input type="submit" value="완료">
-                </form>
+                {% if user.is_active %} 
+                    <form method="post" action="">
+                        {% csrf_token %} 
+                        댓글 : {{cmt_form}} <input type="submit" value="완료">
+                    </form>
+                {% else %} 
+                    <p style="color: red;">로그인 후 댓글 사용 가능</p>
+                {% endif %} 
                 {% for cmt in cmts %} 
                     <p>{{cmt.author}} : {{cmt}}</p>
                 {% endfor %} 

@@ -110,6 +110,9 @@ p{
     <form method="POST" action="{% url 'write' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div>
+            제목 : <input type="text" name="post_title">
+        </div>
+        <div>
             작성자 : {{user.username}}
         </div>
         <div>

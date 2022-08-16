@@ -103,18 +103,25 @@
 
         <!-- 0815/백엔드 추가 -->
 
-        <form method="POST" action="{% url 'edit' user.id %}" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'update' edit_post.post_id %}" enctype="multipart/form-data">
             {% csrf_token %}
+            <div>
+                제목 : <input type="text" name="post_title" value="{{edit_post.post_title}}">
+            </div>
             <div>
                 작성자 : {{user.username}}
             </div>
             <div>
-                업로드 사진 : <input type="file" name="post_img" id="fileupload" value="{{edit_post.post_img}}"/>
+                업로드 사진 : <input type="file" name="post_img" id="fileupload" placeholder="{{edit_post.post_img.url}}"/>
+                <img src="{{edit_post.post_img.url}}" alt="수정 전 이미지">
             </div>
             <div>
                 내용 : <textarea name="post_content" cols="80" rows="30">{{edit_post.post_content}}</textarea>
             </div>
-        
+            <div>
+                카테고리 : {{edit_post.post_cate}}
+            </div>
+         
             <button type="submit" value="submit">작성 완료</button>
         </form>
     </body>

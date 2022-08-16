@@ -2,6 +2,7 @@ from multiprocessing import context
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
+from django.contrib.auth import authenticate
 from django.utils import timezone
 from .models import Category, Post, Comment
 from .forms import CommentForm
@@ -45,7 +46,8 @@ def cate_detail(request, cate_id):
 '''
 
 def cate_detail_comment(request, cate_id, post_id):
-    posts = Post.objects.filter(post_cate=cate_id)
+    cate = Category.objects.get(post_cate=cate_id) # cate id가 옴
+    posts = Post.objects.filter(post_cate=cate)
     post = get_object_or_404(Post, pk=post_id)
     # cate_id = post.post_cate
     # print('cate_id 잘 가져 오고 있느냐 :: ', cate_id)
@@ -53,6 +55,7 @@ def cate_detail_comment(request, cate_id, post_id):
     cmts = Comment.objects.filter(post_id=post_id)
     '''댓글'''
     if request.method == 'POST':
+        user = request.user
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
@@ -70,7 +73,7 @@ def cate_detail_comment(request, cate_id, post_id):
             'cmt_form':comment_form,
             'cmts':cmts
         }
-        return render('category_detail.html', context)
+        return render(request, 'category_detail.html', context)
 
 def category(request):
     '''카테고리 육각형 모음'''
@@ -82,6 +85,7 @@ def write(request):
     post = Post()
     post.author = request.user
     post.post_date = timezone.now()
+    post.post_title = request.POST.get('post_title')
     post.post_content = request.POST.get('post_content')
     post.post_img = request.FILES.get('post_img')
     post_cate_id = request.POST.get('post_cate') #cate의 id를 가져옴
@@ -102,25 +106,29 @@ def get_write(request):
     return render(request, 'write.html', {'post_cate':post_cate})
 
 def edit(request, id):
-    edit_post = Post.objects.filter(id=id)
-    if request.method == 'POST':
-        post = Post()
-        user = request.user
-        post.author = user
-        return redirect('mypage', user.id)
-    else:
-        return render(request, 'edit.html', {'edit_post':edit_post, 'post':post, 'user':user})
+    '''method==GET'''
+    # edit_post = Post.objects.get(post_id=id)
+    edit_post = get_object_or_404(Post, post_id=id)
+    print('img 출력 ::' , edit_post.post_img)
+    # if request.method == 'POST':
+    #     post = Post()
+    #     user = request.user
+    #     post.author = user
+    #     return redirect('mypage', user.id)
+    # else:
+    return render(request, 'edit.html', {'edit_post':edit_post})
         
 def update(request, id):
-    update_post = get_object_or_404(Post, id=id)
-    if request.method == 'POST':
-        update_post.post_date = timezone.now()
-        update_post.post_content = request.POST['post_content']
-        update_post.post_img = request.FILES.get('post_image')
-        update_post.save()
-        return redirect('mypage', update_post.id)
-    else:
-        return render(request, 'edit.html')
+    '''method==POST'''
+    # update_post = get_object_or_404(Post, id=id)
+    user = request.user
+    update_post = Post.objects.get(post_id=id)
+    update_post.post_title = request.POST['post_title']
+    update_post.post_date = timezone.now()
+    update_post.post_content = request.POST['post_content']
+    update_post.post_img = request.FILES.get('post_img')
+    update_post.save()
+    return redirect('mypage', user.id)
 
 
 def delete (request, id):

@@ -52,7 +52,7 @@ def signin(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('mypage')
+    return redirect('category')
 
 def find_pw(request):
     return render(request, 'find_pw.html')
@@ -63,7 +63,7 @@ def find_name(request):
 def reset_pw(request):
     return render(request, 'reset_pw.html')
 
-def mypage(request, name):
+def mypage(request, id):
     '''
     url에 user id가 아닌 username이 뜨게 하고 싶었다.
     name(별명)을 받아와서 post = Post.objects.filter(author=name)으로 하려 했는데
@@ -73,8 +73,8 @@ def mypage(request, name):
     User.objects.get(username=name) 정보를 user에 담고 그것으로 Post를 filter하니 잘 되었다.
     '''
     if request.method == 'GET':
-        post = Post.objects.filter(author=name)
-        print(post)
+        user = User.objects.get(id=id)
+        post = Post.objects.filter(author=user)
     return render(request, 'mypage.html', {'post':post})
 
 def detail(request, id):
