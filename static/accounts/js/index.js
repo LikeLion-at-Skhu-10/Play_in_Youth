@@ -58,3 +58,28 @@ const goToday = () => {
   date = new Date();
   renderCalendar();
 };
+
+//Writing and Comment
+const dateWriting = document.createElement('div');
+const dateComment = document.createElement('div');
+function dateWrite() {
+  const Dates = document.body.querySelectorAll('.date');
+
+  Dates[1].appendChild(dateComment);
+  Dates[1].appendChild(dateWriting);
+
+  dateWriting.classList.add('myPageWriting');
+  dateComment.classList.add('myPageComment');
+
+  dateWriting.innerHTML = '1';
+  dateComment.innerHTML = '2';
+  //나중에는 해당 dateWriting을 누르면 해당 게시물만 함수 실행이 되도록 하기
+}
+dateWrite();
+
+function myWritingModal() {
+  console.log('Hello');
+}
+function myCommentModal() {}
+dateWriting.addEventListener('click', myWritingModal);
+dateComment.addEventListener('click', myCommentModal);
