@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" type="text/css" href="{% static 'posts/css/edit.css' %}">   
 </head>
-<body>
-    <ul>
-        <h3>글 수정</h3>
-        <div id="Box">
-            <div id="PhotoBox">
-                <img src="{% static 'posts\img\img03.jpg'%}" style="position: relative;
-                top: 4em;" ><br>
-            </div>
-        <div class = myProfile></div>
-        <div id="PlusContent">
-            <textarea rows="20" cols="56" placeholder="옥수수를 좋아하는 5060/7080 여러분 환영 합니다. 회비는 하루 10,000입니다. 지각비 5,000,000입니다. 현재 70대 남성 1분, 60대 여성 2분 계십니다. 감사합니다. (_ _ ) 옥수수를 좋아하는 5060/7080 여러분 환영 합니다. 회비는 하루 10,000입니다. 지각비 5,000,000입니다. 현재 70대 남성 1분, 60대 여성 2분 계십니다. 감사합니다. (_ _ ) 옥수수를 좋아하는 5060/7080 여러분 환영 합니다"></textarea>
+<body> 
+    <div class="container">
+    <h3 class="title">글 작성</h3>
+    <div id="Box">      
+        <div id="PhotoPlusBox">
+            <img src="{% static 'accounts/img/downloadbutton.png'%}">
+            눌러서 사진 추가
         </div>
+        <div class="right_bar">
+            <div class = myProfile>마광팔</div>
+            <textarea rows="20" cols="56" placeholder="내용 추가 "></textarea>
             <button type="submit"style="float:right";> 작성완료 </button>
         </div>
-    </ul>
+    </div>
+    </div>
 </body>
 </html>
