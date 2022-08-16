@@ -25,15 +25,17 @@ def cate_detail(request, cate_id):
     3) 글 내용이 같아야 함
     4) 글 아이디가 같아야 함 ✔
     '''
-
+    posts = ''
     # 해당 카테고리 글 다 가져오기
     # posts = get_object_or_404(Category, id=id) #이렇게 하면 html에서 반복을 못함
     posts = Post.objects.filter(post_cate=cate_id)
+    cate_name = posts.first()
 
     # 각 글의 content, comment, img, author, date 가져오기(모달부분)
 
     context = {
         'posts':posts,
+        'cate_name':cate_name
     }
     return render(request, 'category_detail.html', context)
 
@@ -45,7 +47,7 @@ def cate_detail(request, cate_id):
 3. 닫기를 누르면 댓글 사라짐.
 '''
 
-def cate_detail_comment(request, cate_id, post_id):
+def cate_detail_comment(request, cate_id, post_id): # cate_id == '한글(예:자전거)', cate == '숫자(예:1)'
     cate = Category.objects.get(post_cate=cate_id) # cate id가 옴
     posts = Post.objects.filter(post_cate=cate)
     post = get_object_or_404(Post, pk=post_id)
@@ -55,16 +57,16 @@ def cate_detail_comment(request, cate_id, post_id):
     cmts = Comment.objects.filter(post_id=post_id)
     '''댓글'''
     if request.method == 'POST':
-        user = request.user
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.author = request.user
-            comment.post_id = request.post_id
+            comment.post_id = post
             comment.comment_content = comment_form.cleaned_data['comment_content']
             comment.comment_date = timezone.now()
             comment.save()
-            return redirect('cate_detail')
+            cate_id = cate.id
+            return redirect('cate_detail', cate_id)
     else:
         comment_form = CommentForm()
         context = {
