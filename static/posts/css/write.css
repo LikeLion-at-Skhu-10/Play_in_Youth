@@ -1,23 +1,37 @@
+*{
+    padding : 0;
+    margin : 0;
+
+}
+#Box {
+    display : flex;
+    background-color: whitesmoke;
+    height: 31.5em;
+    width: 52.8em;
+    margin : auto;
+    border-radius: 0.5em;
+}
+
+.title{
+    text-align :center;    
+    font-size: 2.5em;
+    padding: 1em 0;
+}
+
 a{
     text-decoration: none; 
 }
 
 #PhotoPlusBox{
     border:2px dashed black;
-    display: inline-block;
     background-color: white;
     height: 27em;
     width: 19em;
     margin:1.5em;
-    text-align:center;
-}
-
-body {
-    display:inline-block;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    margin: 5em;
-    padding:5em;
+    justify-content: center;
 }
 
 li{
@@ -25,41 +39,14 @@ li{
     padding: 3em;
 }
 
-    #PlusContent{
-    position: relative;
-    display: inline-block;
-    background-color: white;
-    height: 19em;
-    width: 26em;
-    margin-top: 1em;
-    bottom: 28em;
-    left: 25em;
-}
-
-h3{
-    text-align: center;
-    justify-content: center;
-    position: relative;
-    left: 10em;
-    font-size:xx-large;
-}
-
-ul{
-    list-style-type: none;
-}
-
 button {
     background-Color: #5699D6;
     border-radius: 17em;
     color: white;
     border: 0;
-    outline: 0;
-    margin-right: 1em;
-    position: relative;
-    bottom: 8em;
     height: 2.5em;
     width: 5.5em;
-    right: 1em;
+    margin-left: auto;
 }
 
 textarea {
@@ -67,17 +54,7 @@ textarea {
 	resize: none;
 }
 
-#Box {
-    background-color: whitesmoke;
-    display:inline-block;
-    align-items: inline-block;
-    height: 31.5em;
-    width: 52.8em;
-    position: relative;
-    left: 20em;
-}
-
-    textarea::placeholder {
+textarea::placeholder {
     font-size: 1.5em;
 
 }
@@ -87,25 +64,26 @@ input:focus {
 }
 
 .myProfile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: white;
     width: 3.5em;
     height: 3.5em;
-    border-radius: 10em;
+    border-radius:  50%;
     background-color: lightgreen;
-    position: relative;
-    left: 26em;
-    bottom: 28em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 p{
     top: 6.5em;
-    position: relative;
     color: black;
 }
 
-*:focus {
-    outline: none;
+.right_bar{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.container{
+    min-width: 960px;
 }

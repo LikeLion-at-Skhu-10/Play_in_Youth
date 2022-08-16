@@ -8,23 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=10">
     <link rel="stylesheet" type="text/css" href="{% static 'posts/css/write.css' %}">
 </head>
-<body>
-    <ul>
-        <h3>글 작성</h3>
-        <div id="Box">
+<body> 
+        <div class="container">
+        <h3 class="title">글 작성</h3>
+        <div id="Box">      
             <div id="PhotoPlusBox">
-                <img src="{% static 'accounts/img/downloadbutton.png'%}" style="
-                top: 7.2em;
-                position: relative;">
-                
-                <p>눌러서 사진추가</p>
+                <img src="{% static 'accounts/img/downloadbutton.png'%}">
+                눌러서 사진 추가
             </div>
-            <div class = myProfile></div>
-            <div id="PlusContent">
-                <textarea rows="20" cols="56" placeholder="내용 추가    ___________________________________"></textarea>
+            <div class="right_bar">
+                <div class = myProfile>마광팔</div>
+                <textarea rows="20" cols="56" placeholder="내용 추가 "></textarea>
+                <button type="submit"style="float:right";> 작성완료 </button>
             </div>
-            <button type="submit"style="float:right";> 작성완료 </button>
         </div>
-    </ul>
+        </div>
 </body>
 </html>
