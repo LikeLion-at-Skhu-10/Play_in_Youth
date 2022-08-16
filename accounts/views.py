@@ -72,13 +72,10 @@ def mypage(request, name):
     그래서 진짜 User에서 가져오기로 했다
     User.objects.get(username=name) 정보를 user에 담고 그것으로 Post를 filter하니 잘 되었다.
     '''
-    user = User.objects.get(username=name) 
-    post = Post.objects.filter(author=user)
-    context = {
-        'post':post,
-        'user':user
-    }
-    return render(request, 'mypage.html', context)
+    if request.method == 'GET':
+        post = Post.objects.filter(author=name)
+        print(post)
+    return render(request, 'mypage.html', {'post':post})
 
 def detail(request, id):
     post = get_object_or_404(Post,id=id)

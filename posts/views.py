@@ -12,30 +12,6 @@ from django.contrib.auth.decorators import login_required
 def base(request):
     return render(request, 'base.html')
 
-def test(request):
-    post = Post.objects.get(author=5)
-    post_id = post.post_id
-    cmts = Comment.objects.filter(post_id=post_id)
-    if request.method == 'POST':
-        cmt_form = CommentForm(request.POST)
-        if cmt_form.is_valid():
-            comment = cmt_form.save(commit=False)
-            comment.post_id = post
-            comment.post_content = cmt_form.cleaned_data['comment_content']
-            comment.author = request.user
-            comment.comment_date = timezone.now()
-            comment.save()
-            
-            return redirect('test')
-    else:
-        cmt_form = CommentForm()
-        context = {
-            'post':post,
-            'cmt_form':cmt_form,
-            'cmts':cmts
-        }
-        return render(request, 'test.html', context)
-
 def main(request):
     return render(request, 'main.html')
 
@@ -106,9 +82,10 @@ def write(request):
     post = Post()
     post.author = request.user
     post.post_date = timezone.now()
-    post.post_content = request.POST['post_content']
+    post.post_content = request.POST.get('post_content')
     post.post_img = request.FILES.get('post_img')
     post_cate_id = request.POST.get('post_cate') #cate의 id를 가져옴
+    print("cate id 출력해보기 :: ", post_cate_id)
     post.post_cate = Category.objects.get(id=post_cate_id) #cate의 id에 해당하는 Category모델에서 object를 불러와봤는데 디비에저장된이름(한글) 그대로 옴
 
     # post.post_cate = request.POST.get('post_cate')
@@ -126,31 +103,35 @@ def get_write(request):
 
 def edit(request, id):
     edit_post = Post.objects.filter(id=id)
-    if request.method == "POST":
-        edit_post.post_date = timezone.localtime()
-        edit_post.post_content = request.POST['post_content']
-        edit_post.post_img = request.FILES.get('post_image', False)
-        edit_post.save()
-        return redirect('mypage', id)
+    if request.method == 'POST':
+        post = Post()
+        user = request.user
+        post.author = user
+        return redirect('mypage', user.id)
+    else:
+        return render(request, 'edit.html', {'edit_post':edit_post, 'post':post, 'user':user})
+        
+def update(request, id):
+    update_post = get_object_or_404(Post, id=id)
+    if request.method == 'POST':
+        update_post.post_date = timezone.now()
+        update_post.post_content = request.POST['post_content']
+        update_post.post_img = request.FILES.get('post_image')
+        update_post.save()
+        return redirect('mypage', update_post.id)
     else:
         return render(request, 'edit.html')
 
-def update(request, id):
-    update_post = Post.objects.filter(id=id)
-    if request.method == "POST":
-        update_post.post_date = timezone.localtime()
-        update_post.post_content = request.POST['post_content']
-        update_post.post_img = request.FILES.get('post_image', False)
-        update_post.save()
-        return render(request, 'mypage.html')
-    else:
-        return render(request, 'edit.html')
 
 def delete (request, id):
-    delete_post = Post.objects.filter(id = id)
-    delete_post.delete()
-    return render(request, 'mypage.html')
-
+    if request.method == 'GET':
+        delete_post = get_object_or_404(Post, id=id)
+        post = Post()
+        user = request.user
+        post.author = user
+        delete_post.delete()
+    return redirect('mypage', user.id)
+    
 # 좋아요
 def likes(request, id):
     like_post = get_object_or_404(Post, id=id)

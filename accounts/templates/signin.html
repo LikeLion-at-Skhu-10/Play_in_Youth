@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% load static %}
 
 <!DOCTYPE html>
@@ -17,16 +16,12 @@
             <center><a href="#" class="find">별명 찾기</a> | <a href="#" class="find">비밀번호 찾기</a></center>
             <button class="button">로그인</button>
         </div>
+        <form method="POST" action="{% url 'signin' %}">
+            {% csrf_token %} 
+            별명 : {{form.username}}<br>
+            비번 : {{form.password}}<br>
+            <button type="submit">로그인</button>
+        </form>
     </div>   
 </body>
 </html>
-=======
-<h1>로그인</h1>
-<hr>
-<form method="POST" action="{% url 'signin' %}">
-    {% csrf_token %} 
-    별명 : {{form.username}}<br>
-    비번 : {{form.password}}<br>
-    <button type="submit">로그인</button>
-</form>
->>>>>>> jeen
