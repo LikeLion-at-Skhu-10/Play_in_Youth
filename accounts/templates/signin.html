@@ -16,6 +16,9 @@
             <a href="#" class="find">별명 찾기</a> | <a href="#" class="find">비밀번호 찾기</a>
             <button class="button">로그인</button>
         </div>
+        {% if msg %} 
+            <p style="color: red;">{{msg}}</p>
+        {% endif %}
         <form method="POST" action="{% url 'signin' %}">
             {% csrf_token %} 
             별명 : {{form.username}}<br>

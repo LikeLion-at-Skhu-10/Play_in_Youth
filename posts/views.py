@@ -51,9 +51,7 @@ def cate_detail_comment(request, cate_id, post_id): # cate_id == '한글(예:자
     cate = Category.objects.get(post_cate=cate_id) # cate id가 옴
     posts = Post.objects.filter(post_cate=cate)
     post = get_object_or_404(Post, pk=post_id)
-    # cate_id = post.post_cate
-    # print('cate_id 잘 가져 오고 있느냐 :: ', cate_id)
-    # posts = Post.objects.filter(post_cate=cate_id)
+
     cmts = Comment.objects.filter(post_id=post_id)
     '''댓글'''
     if request.method == 'POST':
@@ -67,13 +65,14 @@ def cate_detail_comment(request, cate_id, post_id): # cate_id == '한글(예:자
             comment.save()
             cate_id = cate.id
             return redirect('cate_detail', cate_id)
+            
     else:
         comment_form = CommentForm()
         context = {
             'posts':posts,
             'post':post,
             'cmt_form':comment_form,
-            'cmts':cmts
+            'cmts':cmts,
         }
         return render(request, 'category_detail.html', context)
 
@@ -121,7 +120,7 @@ def edit(request, id):
     return render(request, 'edit.html', {'edit_post':edit_post})
         
 def update(request, id):
-    '''method==POST'''
+    '''method==POST && post update'''
     # update_post = get_object_or_404(Post, id=id)
     user = request.user
     update_post = Post.objects.get(post_id=id)
@@ -131,29 +130,37 @@ def update(request, id):
     update_post.post_img = request.FILES.get('post_img')
     update_post.save()
     return redirect('mypage', user.id)
-
-
+    
 def delete (request, id):
-    if request.method == 'GET':
-        delete_post = get_object_or_404(Post, id=id)
-        post = Post()
-        user = request.user
-        post.author = user
-        delete_post.delete()
+    '''post delete'''
+    delete_post = Post.objects.get(post_id=id)
+    delete_post.delete()
+    # if request.method == 'GET':
+    #     delete_post = get_object_or_404(Post, post_id=id)
+    #     post = Post()
+    user = request.user
+    # post.author = user
+    #     delete_post.delete()
+    return redirect('mypage', user.id)
+def delete_cmt (request, id):
+    '''comment delete'''
+    delete_cmt = Comment.objects.get(id=id)
+    delete_cmt.delete()
+    user = request.user
     return redirect('mypage', user.id)
     
 # 좋아요
-def likes(request, id):
-    like_post = get_object_or_404(Post, id=id)
-    if request.user in like_post.like.all():
-        like_post.like.remove(request.user)
+def likes(request, id): # 이 부분에 있는 id가 urls와 같게 작성.
+    like_post = get_object_or_404(Post, post_id=id)
+    if request.user in like_post.post_like.all(): 
+        like_post.post_like.remove(request.user)
         like_post.like_count -= 1
         like_post.save()
     else:
-        like_post.like.add(request.user)
+        like_post.post_like.add(request.user)
         like_post.like_count += 1
         like_post.save()
-    return redirect('/posts/category_detail/category/' + str(id))
+    return redirect('cate_detail', like_post.post_cate.id) # id를 가져오는 방법을 모델과 관련하여 고민해봐야 함
 
 # category_detail
 def gardening(request):

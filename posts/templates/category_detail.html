@@ -25,7 +25,7 @@
             <!-- 이미지에 마우스 올릴때 -->
             <div style="background-color: gray;"><p>/*마우스 올릴때 화면*/</p>
                 <p>작성자 : {{post.author}} || 작성일 : {{post.post_date}}</p>
-                <p>{{post.post_content}}</p>
+                <p>내용 : {{post.post_content}}</p>
                 <button type="button"><a href="{% url 'cate_detail_comment' post.post_cate post.post_id %}">더보기</a></button>
             </div>
 
@@ -33,19 +33,37 @@
             <div style="background-color: skyblue;"><p>/*모달 화면*/</p>
                 <img src="{{post.post_img.url}}" width="100" height="100" alt="image">
 
-                <!-- <p>댓글</p> -->
+                <p>작성자 : {{post.author}} || 작성일 : {{post.post_date}}</p>
+                <p>제목 : {{post.post_title}}</p>
+                <p>내용 : {{post.post_content}}</p>  
+
+                <!-- 댓글 & 좋아요 -->
                 {% if user.is_active %} 
+                    <!-- 좋아요 -->
+                    <a href="{% url 'likes' post.post_id %}">
+                        {% if user in post.post_like.all %}
+                        좋아요 취소
+                        {% else %}
+                        좋아요
+                        {% endif %}
+                    </a>
+                {% endif %} 
+                    <div><large>👍</large>  {{post.like_count}}</div>
+                {% if user.is_active %}
+                    <!-- 댓글 -->
                     <form method="post" action="">
                         {% csrf_token %} 
-                        댓글 : {{cmt_form}} <input type="submit" value="완료">
+                        댓글 : {{cmt_form.comment_content}} <input type="submit" value="완료">
                     </form>
-                {% else %} 
+
+                {% else %}     
                     <p style="color: red;">로그인 후 댓글 사용 가능</p>
                 {% endif %} 
+
                 {% for cmt in cmts %} 
-                    <p>{{cmt.author}} : {{cmt}}</p>
+                    <p>{{cmt.author}} : {{cmt}}<small>  {{cmt.comment_date}}</small></p>
                 {% endfor %} 
-                <p>좋아요</p>
+
             </div>
         </div>
     {% else %} 
@@ -59,22 +77,42 @@
             <div style="background-color: gray;"><p>/*마우스 올릴때 화면*/</p>
                 <p>작성자 : {{post.author}} || 작성일 : {{post.post_date}}</p>
                 <p>{{post.post_content}}</p>
-                <button type="button"><a href="">더보기</a></button>
+                <button type="button"><a href="{% url 'cate_detail_comment' post.post_cate post.post_id %}">더보기</a></button>
             </div>
 
             <!-- 모달 -->
             <div style="background-color: skyblue;"><p>/*모달 화면*/</p>
                 <img src="{% static 'posts/img/post_default.png' %}" width="100" height="100" alt="image">
+                <p>작성자 : {{post.author}} || 작성일 : {{post.post_date}}</p>
+                <p>제목 : {{post.post_title}}</p>
+                <p>내용 : {{post.post_content}}</p>                  
 
-                <!-- <p>댓글</p> -->
-                <form method="post" action="">
-                    {% csrf_token %} 
-                    댓글 : {{cmt_form}} <input type="submit" value="완료">
-                </form>
+                <!-- 댓글 & 좋아요 -->
+                {% if user.is_active %} 
+                    <!-- 좋아요 -->
+                    <a href="{% url 'likes' post.post_id %}">
+                        {% if user in post.post_like.all %}
+                        좋아요 취소
+                        {% else %}
+                        좋아요
+                        {% endif %}
+                    </a>
+                {% endif %} 
+                    <div><large>👍</large>  {{post.like_count}}</div>
+                {% if user.is_active %}
+                    <!-- 댓글 -->
+                    <form method="post" action="">
+                        {% csrf_token %} 
+                        댓글 : {{cmt_form.comment_content}} <input type="submit" value="완료">
+                    </form>
+
+                {% else %}     
+                    <p style="color: red;">로그인 후 댓글 사용 가능</p>
+                {% endif %} 
+
                 {% for cmt in cmts %} 
-                    <p>{{cmt.author}} : {{cmt}}</p>
+                    <p>{{cmt.author}} : {{cmt}}<small>  {{cmt.comment_date}}</small></p>
                 {% endfor %} 
-                <p>좋아요</p>
             </div>
         </div>
     {% endif %} 

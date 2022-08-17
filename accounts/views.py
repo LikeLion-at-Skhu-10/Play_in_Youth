@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import auth
+from django.http import HttpResponse
 from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .forms import UserForm
 from .models import User
+from posts.models import Comment
 from posts.views import Post
 
 # Create your views here.
@@ -72,10 +74,21 @@ def mypage(request, id):
     그래서 진짜 User에서 가져오기로 했다
     User.objects.get(username=name) 정보를 user에 담고 그것으로 Post를 filter하니 잘 되었다.
     '''
-    if request.method == 'GET':
+    # if request.method == 'GET':
+    if request.user.is_authenticated and request.user.id==id:
         user = User.objects.get(id=id)
         post = Post.objects.filter(author=user)
-    return render(request, 'mypage.html', {'post':post})
+        comment = Comment.objects.filter(author=user)
+        context = {
+            'post':post,
+            'comment':comment
+        }
+        return render(request, 'mypage.html', context)
+    else:
+        msg = "내 정보 페이지는 로그인 후 접근 가능합니다."
+        return render(request, 'signin.html', {'msg':msg})
+    # except:
+    #     return HttpResponse("로그인 후 접근 가능합니다.")
 
 def detail(request, id):
     post = get_object_or_404(Post,id=id)

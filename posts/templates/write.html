@@ -123,7 +123,7 @@ p{
         </div>
         <div>
             카테고리 : 
-        <select class="select" name="post_cate"> <!--option에 value를 지정해주니까 값을 none으로 받아옴. select에 해줘야 함.-->
+        <select class="select" name="post_cate"> <!--option에 name을 지정해주니까 value를 none으로 받아옴. select에 해줘야 함.-->
             {% for cate in post_cate %}
                 <option value="{{cate.id}}">{{cate}}</option>
             {% endfor %}
