@@ -8,6 +8,8 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="{% static 'posts/css/category.css'%}" />
     <link rel="stylesheet" type="text/css" href="{% static 'posts/css/categoryContent.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/myModal.css'%}" />
+
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
   <body>
@@ -85,7 +87,35 @@
           <img src="{% static 'posts/img/img15.jpg'%}" />
         </figure>
       </div>
+
+      <div class="myModal">
+        <button>닫기</button>
+        <div class="myModalWrapper">
+          <div class="myModalContent">
+            <img src="{% static 'posts/img/img01.jpg'%}" class="myModalContentImage" />
+            <div class="myModalContentText">
+              <div class="myModalContentTextText">
+                옥수수를 좋아하는 5060/7080 여러분 환영 합니다. 회비는 하루 10,000입니다. 지각비 5,000,000입니다. 현재 70대 남성 1분, 60대 여성 2분 계십니다. 감사합니다. 옥수수를 좋아하는 5060/7080 여러분 환영 합니다. 회비는 하루 10,000입니다. 지각비
+                5,000,000입니다. 현재 70대 남성 1분, 60대 여성 2분 계십니다. 감사합니다. 옥수수를 좋아하는 5060/7080 여러분 환영 합니다. 회비는 하루 10,000입니다. 지각비 5,000,000입니다. 현재 70대 남성 1분, 60대 여성 2분 계십니다. 감사합니다.
+                옥수수를 좋아하는 5060/7080 여러분 환영 합니다. 회비는 하루 10,000입니다. 지각비 5,000,000입니다. 현재 70대 남성 1분, 60대 여성 2분 계십니다. 감사합니다. 가입 문의 : 010-1234-5678
+              </div>
+              <div class="myModalContentTextlike"><img src="{% static 'posts/img/like.png'%}" />37</div>
+            </div>
+          </div>
+          <div class="myModalSideBar">
+            <div class="myModalSideBar_comment_write"><input /><button>작성</button></div>
+            <div class="myModalSideBar_comment_written_byuser">
+              <div class="myModalSideBar_comment_written_byusername">
+                <div>수진</div>
+                <div>2022.07.01</div>
+              </div>
+              <div>옥수수.. 썩은거 아닌가요..</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </content>
     <script src="{% static 'posts/js/mansonry.js'%}"></script>
+    <script src="{% static 'posts/js/modal.js'%}"></script>
   </body>
 </html>

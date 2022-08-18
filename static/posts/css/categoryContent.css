@@ -1,5 +1,20 @@
+@media (max-width: 540px) {
+  .content_imgs {
+    column-width: 9em;
+  }
+}
+
+@media (min-width: 1180px) {
+  .content_imgs {
+    column-width: 13em;
+  }
+}
+html {
+  font-size: 16px;
+}
 .content_bar {
   width: 80%;
+  min-width: 500px;
   display: flex;
   margin: 1em auto;
   justify-content: space-between;
@@ -23,6 +38,7 @@
   width: 80vw;
   margin: auto;
   column-width: 13em;
+  min-width: 500px;
 }
 
 .content_imgs figure {
@@ -50,7 +66,6 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
-  z-index: 10000;
 }
 
 .myProfile {
@@ -58,19 +73,22 @@
   justify-content: center;
   align-items: center;
   color: white;
-  width: 3.5em;
-  height: 3.5em;
-  border-radius: 100000em;
+  /*아 시발 이거 어케함 width*/
+  width: 4em;
+  height: 4em;
+  font-size: 1em;
+  border-radius: 50%;
   background-color: lightgreen;
 }
 
 .myPosting {
-  font-size: 1em;
+  font-size: 14px;
   height: 1em;
   color: white;
 }
 
-.plustButton {
+.plusButton {
+  font-size: 10px;
   border: none;
   background-color: #559ad6;
   border-radius: 0.2em;
