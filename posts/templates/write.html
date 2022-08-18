@@ -88,21 +88,47 @@ p{
 
     </style>
 </head>
-<body>
-    <ul>
-        <h3>글 작성</h3>
-        <div id="Box">
+<body> 
+        <div class="container">
+        <h3 class="title">글 작성</h3>
+        <div id="Box">      
             <div id="PhotoPlusBox">
-                <img src="{% static 'accounts/img/downloadbutton.png'%}"><br>
-                눌러서 사진추가
+                <img src="{% static 'accounts/img/downloadbutton.png'%}">
+                눌러서 사진 추가
             </div>
-            <div id="PlusContent">
-                <input type="text" placeholder="내용 추가">
-                <br>
-                <p>__________________________________________________</p>
+            <div class="right_bar">
+                <div class = myProfile>마광팔</div>
+                <textarea rows="20" cols="56" placeholder="내용 추가 "></textarea>
+                <button type="submit"style="float:right";> 작성완료 </button>
             </div>
-            <button type="submit"style="float:right";> 작성완료 </button>
         </div>
     </ul>
+
+    <!-- 0815/백엔드 추가 -->
+
+    <form method="POST" action="{% url 'write' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            제목 : <input type="text" name="post_title">
+        </div>
+        <div>
+            작성자 : {{user.username}}
+        </div>
+        <div>
+            업로드 사진 : <input type="file" name="post_img" id="fileupload" />
+        </div>
+        <div>
+            내용 : <textarea name="post_content" cols="70" rows="30"></textarea>
+        </div>
+        <div>
+            카테고리 : 
+        <select class="select" name="post_cate"> <!--option에 name을 지정해주니까 value를 none으로 받아옴. select에 해줘야 함.-->
+            {% for cate in post_cate %}
+                <option value="{{cate.id}}">{{cate}}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <button type="submit">작성 완료</button>
+    </form>
 </body>
 </html>

@@ -11,6 +11,9 @@
     <div class="main" style="height:30em;min-height:30em;">
         <h1 class="text">로그인</h1>
         <div class="container">
+            {% if msg %} 
+            <p style="color: red;">{{msg}}</p>
+            {% endif %}
             <form method="POST" action="{% url 'signin' %}">
                 {% csrf_token %} 
                 {{form.username}}

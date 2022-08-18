@@ -1,0 +1,133 @@
+.myModal {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background-color: rgba(1, 1, 1, 0.5);
+}
+.myModal button {
+  padding: 1em;
+  width: 7em;
+  border: none;
+  border-radius: 1.5em;
+  color: white;
+  background-color: black;
+  margin: 0 1em 1em;
+}
+.myModalWrapper {
+  display: flex;
+  width: 100%;
+  height: 35em;
+  background-color: white;
+}
+.myModalSideBar {
+  border-left: 1px solid gray;
+  width: 30em;
+  min-width: 443px;
+}
+.myModalContent {
+  width: 67%;
+  display: flex;
+  min-width: 947px;
+}
+.myModalContentImage {
+  width: 55%;
+  object-fit: contain;
+  padding-left: 2em;
+}
+
+.myModalContentText {
+  width: 45%;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.myModalContentTextlike {
+  display: flex;
+  align-items: end;
+  justify-content: end;
+}
+.myModalContentTextlike img {
+  width: 2em;
+  padding-right: 0.3em;
+}
+
+.myModalSideBar_comment_written_byuser {
+  margin: 1em;
+  padding: 0 0 1em 1em;
+  border-bottom: 1px solid black;
+}
+.myModalSideBar_comment_written_byusername {
+  display: flex;
+  align-items: end;
+  padding-bottom: 0.5em;
+}
+
+.myModalSideBar_comment_written_byusername :first-child {
+  font-size: 1.3em;
+}
+
+.myModalSideBar_comment_written_byusername :last-child {
+  font-size: 0.1em;
+  padding: 1em;
+}
+
+.myModalSideBar_comment_write {
+  padding: 1em;
+}
+.myModalSideBar_comment_write input {
+  width: 80%;
+  height: 3em;
+  background-color: #ebebeb;
+  border-radius: 10000em;
+  border: none;
+}
+.myModalSideBar_comment_write button {
+  width: 4em;
+  float: right;
+  border-radius: 0.6em;
+  background-color: #559ad6;
+  color: white;
+  border: none;
+  margin: 0;
+}
+.scrollLock {
+  overflow: hidden;
+}
+
+@media screen and (max-width: 1000px) {
+  .myModalWrapper {
+    width: 50em;
+    height: 35em;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+  }
+  .myModalContent {
+    min-width: 785px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2em;
+  }
+  .myModalContentText {
+    width: 44em;
+  }
+  .myModalContent img {
+    padding: 0;
+  }
+  .myModalSideBar {
+    border: 0;
+    width: 100%;
+  }
+  .myModalSideBar_comment_write input {
+    width: 90%;
+  }
+}

@@ -76,6 +76,8 @@ body {
   text-align: right;
   border-bottom: 1px solid #333333;
   border-left: 1px solid #333333;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .day:nth-child(7n + 1),
@@ -113,4 +115,31 @@ body {
 
 .other {
   opacity: 0.3;
+}
+
+.myPageWriting {
+  background-color: indianred;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.myPageComment {
+  background-color: lightskyblue;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
 }
