@@ -46,7 +46,6 @@ def signin(request):
         if form.is_valid():
             user = form.get_user()
             auth.login(request, user)
-            print("======",user.is_authenticated, request.user.is_authenticated, "==========")
             return redirect('mypage', user.id)
             # return redirect('category')
         else:
