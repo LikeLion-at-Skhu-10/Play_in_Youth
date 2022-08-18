@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.http import HttpResponse
 from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import authenticate
 from .forms import UserForm
 from .models import User
 from posts.models import Comment
@@ -45,7 +46,9 @@ def signin(request):
         if form.is_valid():
             user = form.get_user()
             auth.login(request, user)
+            print("======",user.is_authenticated, request.user.is_authenticated, "==========")
             return redirect('mypage', user.id)
+            # return redirect('category')
         else:
             return render(request, 'signin.html', {'form':form})
     else:
@@ -75,7 +78,10 @@ def mypage(request, id):
     User.objects.get(username=name) 정보를 user에 담고 그것으로 Post를 filter하니 잘 되었다.
     '''
     # if request.method == 'GET':
-    if request.user.is_authenticated and request.user.id==id:
+    user = request.user
+    user_id = str(user.id)  
+    # print(bool(user_id == id)) # True
+    if (user.is_authenticated == True) and (user_id == id): # user.id 는 진짜 id이고 html에서 받아온 id는 생긴건 id지만 str이라서 str(user.id)==id로 해줘야 함.
         user = User.objects.get(id=id)
         post = Post.objects.filter(author=user)
         comment = Comment.objects.filter(author=user)
@@ -86,9 +92,12 @@ def mypage(request, id):
         return render(request, 'mypage.html', context)
     else:
         msg = "내 정보 페이지는 로그인 후 접근 가능합니다."
-        return render(request, 'signin.html', {'msg':msg})
-    # except:
-    #     return HttpResponse("로그인 후 접근 가능합니다.")
+        form = AuthenticationForm()
+        context = {
+            'msg':msg,
+            'form':form
+        }
+        return render(request, 'signin.html', context)
 
 def detail(request, id):
     post = get_object_or_404(Post,id=id)
