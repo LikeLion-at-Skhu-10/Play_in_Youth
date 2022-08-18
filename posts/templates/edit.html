@@ -1,88 +1,114 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-        <title>젊어서노세</title>
-         <link rel="stylesheet" type="text/css" href="{% static 'posts/css/#.css' %}">
-        <style>
-            body {
-                display:inline-block;
-                justify-content: center;
-                align-items: center;
-                margin: 100px;
-                padding:100px;
-            }
+<head>
+    <meta charset="UTF-8">
+    <title>젊어서노세</title>
+     <link rel="stylesheet" type="text/css" href="{% static 'posts/css/#.css' %}">
+    <style>
+body {
+    display:inline-block;
+    justify-content: center;
+    align-items: center;
+    margin: 5em;
+    padding:5em;
+}
 
-            li{
-                float:left;
-                padding: 3px;
-            }
+li{
+    float:left;
+    padding: 3em;
+}
 
             a{
                 text-decoration: none; 
             }
 
-            #PhotoBox{
-                display: block;
-                background-color: white;
-                height: 400px;
-                width: 300px;
-                margin:30px;
-                padding:10px;
-                text-align:center;
-                border-radius: 5%;
-                box-shadow:  0 4px 4px -4px rgb(193,193,193);
-                position: relative;
-            }
+#PhotoBox{
+    display: block;
+    background-color: white;
+    height: 27em;
+    width: 17em;
+    margin:1.5em;
+    padding:1em;
+    text-align:center;
+    border-radius: 5%;
+    box-shadow:  0 4px 4px -4px rgb(193,193,193);
+    position: relative;
+    }
 
-            #PlusContent{
-                position: relative;
-                display: inline-block;
-                background-color: white;
-                height: 200px;
-                width: 400px;
-                margin-top: 40px;
-                bottom:20em;
-                left: 25em;
-            }
+    #PlusContent{
+    position: relative;
+    display: inline-block;
+    background-color: white;
+    height: 19em;
+    width: 26em;
+    margin-top: 1em;
+    bottom: 30em;
+    left: 25em;
+}
 
-            h3{
-                text-align: center;
-            }
+h3{
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    left: 10em;
+    font-size:xx-large;
+}
 
             ul{
                 list-style-type: none;
             }
 
-            button {
-                background-Color:#5699D6;
-                border-radius:5px;
-                color: white;
-                border:0;
-                outline:0;
-                margin-right:10px;
-            }
+button {
+    background-Color: #5699D6;
+    border-radius: 17em;
+    color: white;
+    border: 0;
+    outline: 0;
+    margin-right: 1em;
+    position: relative;
+    bottom: 11em;
+    height: 2.5em;
+    width: 5.5em;
+    right: 1em;
+}
 
-            input[type=text] {
-                border:0;
-                outline:0;
-            }
+textarea {
+	border: none;
+	resize: none;
+}
 
+#Box {
+    background-color: whitesmoke;
+    display:inline-block;
+    align-items: inline-block;
+    height: 31.5em;
+    width: 52.8em;
+    position: relative;
+    left: 20em;
+}
 
-            #Box {
-                background-color: whitesmoke;
-                display:inline-block;
-                align-items: inline-block;
-                height: 520px;
-                width: 820px;
-                }
+    textarea::placeholder {
+    font-size: 1.5em;
 
-            input::placeholder {
-                font-size: 17px;
-                padding:0px;
-                margin:0px;
+}
 
+input:focus {
+  outline: none;
+}
+
+.myProfile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 10em;
+    background-color: lightgreen;
+    position: relative;
+    left: 26em;
+    bottom: 30em;
             }
 
         </style>
@@ -92,11 +118,13 @@
             <h3>글 수정</h3>
             <div id="Box">
                 <div id="PhotoBox">
-                    <img src=""><br>
+                    <img src="{% static 'posts\img\img03.jpg'%}" style="position: relative;
+                top: 4em;" ><br>
                 </div>
-                <div id="PlusContent">
-                    <input type="text" placeholder="내용 추가">
-                </div>
+            <div class = myProfile>마광팔</div>
+        <div id="PlusContent">
+                <textarea rows="20" cols="56" placeholder="옥수수를 좋아하는 5060/7080 여러분 환영 합니다. 회비는 하루 10,000입니다. 지각비 5,000,000입니다. 현재 70대 남성 1분, 60대 여성 2분 계십니다. 감사합니다. (_ _ ) 옥수수를 좋아하는 5060/7080 여러분 환영 합니다. 회비는 하루 10,000입니다. 지각비 5,000,000입니다. 현재 70대 남성 1분, 60대 여성 2분 계십니다. 감사합니다. (_ _ ) 옥수수를 좋아하는 5060/7080 여러분 환영 합니다"></textarea>
+            </div>
                 <button type="submit"style="float:right";> 작성완료 </button>
             </div>
         </ul>

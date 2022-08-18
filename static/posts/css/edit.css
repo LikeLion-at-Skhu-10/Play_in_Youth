@@ -22,8 +22,8 @@ a{
     text-decoration: none; 
 }
 
-#PhotoPlusBox{
-    border:2px dashed black;
+#Photobox{
+    border:none;
     background-color: white;
     height: 27em;
     width: 19em;
