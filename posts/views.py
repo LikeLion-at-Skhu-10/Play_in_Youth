@@ -213,7 +213,7 @@ def likes(request, cate_id): # 이 부분에 있는 id가 urls와 같게 작성.
 #         context['object_list'] = post_list
 
 #         return render(self.request, self.template_name, context)
-def search(request,cate_id):
+def search(request):
     # content_list = Post.objects.all()
     # context = dict()
     # search = request.GET.get('search','')
@@ -224,11 +224,11 @@ def search(request,cate_id):
     #     return render(request, 'post_search.html')
 
     context = dict()
-    content_list = Post.objects.filter(post_cate=cate_id)
-    post = request.POST.get('search',"") #POST 요청에 따라 인자중에, post값이 있으면 가져오고, 아니면 빈 문자열 리턴
+    content_list = Post.objects.all()
+    post = request.POST.get('post',"") #POST 요청에 따라 인자중에, post값이 있으면 가져오고, 아니면 빈 문자열 리턴
     if post:
-        search_list = content_list.filter(content__contains=post) #post가 있으면, content에서 post내용이 있는 것만 content_list에 넣어줌.
-        context['search_list'] = search_list
+        search_list = content_list.filter(content__icontains=post) #post가 있으면, content에서 post내용이 있는 것만 content_list에 넣어줌.
+        context['content_list'] = search_list
         context['post'] = post
         return render(request, 'post_search.html', context) #최종적인 값이 담긴 content_list와 post를 넘겨주고
     else:
