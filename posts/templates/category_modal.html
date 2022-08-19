@@ -27,33 +27,74 @@
       {% else %}
         <div class="header_right"><a href="{% url 'signup' %}">회원가입</a> | <a href="{% url 'signin' %}">로그인</a></div>
       {% endif %} 
-      </header>
+    </header>
 
 
     <!-- 여기서부터는 mansory layout-->
     <content>
-        
         <!-- cate_detail header -->
         <div class="content_bar">
             <button><a href="{% url 'mypage' user.id %}">내 정보</a></button>
-            <div># {{cate_name.post_cate}}</div>
             <button><a href="{% url 'get_write' %}">글작성</a></button>
         </div>
         <button type="button"><a href="{% url 'category' %}">뒤로가기</a></button>
         
-        
-        <!-- cate_detail 이미지 모임 -->
-        <div class="content_imgs">
-            {% for post in posts %}
-            <figure>
-                <a href="{% url 'cate_detail_modal' post.post_id %}"><img id="get" class="{{post.post_id}}" src="{{post.post_img.url}}" width="100" height="100" alt="image"></a>
-              <!-- 감춰진 더보기 div -->
-            </figure>
-            {% endfor %}
-        </div>
-        
         <!-- cate_detail 모달 -->
-        
+        <div class="myModal" >
+            <a href="{% url 'cate_detail' post.post_cate.id %}"><button>닫기</button></a>
+            <div class="myModalWrapper">
+            <div class="myModalContent">
+              <img src="{{post.post_img.url}}" class="myModalContentImage" />
+              <div class="myModalContentText">
+                {{post.post_content}}
+                  <div class="myModalContentTextlike">
+                        <!-- <img src="{% static 'posts/img/like.png'%}" />{{post.like_count}} -->
+                        {% if user.is_active %} <!--로그인 했을 때-->
+
+                            <a href="{% url 'likes' post.post_id %}">
+                                {% if user in post.post_like.all %}
+                                    <!-- 따봉 -->
+                                    <img src="{% static 'posts/img/like2.png'%}" />{{post.like_count}}
+                                {% else %}
+                                    <!-- 빈 따봉 -->
+                                    <img src="{% static 'posts/img/like.png'%}" />{{post.like_count}}
+                                {% endif %}
+                            </a>
+
+                        {% else %} <!--로그인 안 했을 때-->
+                            <img src="{% static 'posts/img/like.png'%}" />{{post.like_count}}
+                        {% endif %}
+
+                    </div>
+                  </div>
+            </div>
+            <div class="myModalSideBar">
+
+                {% if user.is_active %}
+                <div class="myModalSideBar_comment_write">
+                    <form method="post" action="">
+                        {% csrf_token %} 
+                        {{cmt_form.comment_content}}<input type="submit" value="작성">
+                    </form>
+                </div>
+
+                {% else %}     
+                <p style="color: red;">로그인 후 댓글 사용 가능</p>
+                {% endif %} 
+
+                <div class="myModalSideBar_comment_written_byuser">
+                {% for cmt in cmts %}
+                  <div class="myModalSideBar_comment_written_byusername">
+                      <div>{{cmt.author}}</div>
+                      <div>{{cmt.comment_date}}</div>
+                  </div>
+                  <div>{{cmt}}</div>
+                {% endfor %} 
+                </div>
+            </div>
+            </div>
+            <hr>  
+        </div>
     </content>
     
     {% for post in posts %}
@@ -62,6 +103,7 @@
         const figureEle = document.getElementsByTagName('figure');
         const myModal = document.querySelector('.myModal');
         const closeButton = document.querySelector('.myModal :first-child');
+        console.log(myModal);
 
         //마우스 올려졌을 때
         function knowSizefunc(event) {
@@ -108,13 +150,7 @@
         //   document.body.querySelector('.myModalContentText').textContent = id;
         // }
         //modal 조작하는 함수 2개
-        function showModal(event) {
-          const screenY = window.scrollY;
-          const body = document.getElementsByTagName('body')[0];
-          document.querySelector('.myModal').style.display = 'flex';
-          body.classList.add('scrollLock');
-          myModal.style.top = screenY + `px`;
-        }
+        
 
         function closeModal() {
           const body = document.getElementsByTagName('body')[0];

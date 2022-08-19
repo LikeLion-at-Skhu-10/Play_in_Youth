@@ -116,22 +116,29 @@ input:focus {
     <body>
         <ul>
             <h3>글 수정</h3>
-            <div id="Box">
-                <div id="PhotoBox">
-                    <img src="{% static 'posts\img\img03.jpg'%}" style="position: relative;
-                top: 4em;" ><br>
+            <form method="POST" action="{% url 'update' edit_post.post_id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div id="Box">
+                    <div id="PhotoBox">
+                        <input type="file" name="post_img" id="fileupload" placeholder="{{edit_post.post_img.url}}"/>
+                        <img src="{{edit_post.post_img.url}}" alt="수정 전 이미지" style="position: relative;
+                    top: 4em;" ><br>
+                    </div>
+                <div class = myProfile>{{user.username}}</div>
+                <div id="PlusContent">
+                    <input type="text" name="post_title" value="{{edit_post.post_title}}">
+                    <textarea name="post_content" rows="20" cols="56">{{edit_post.post_content}}</textarea>
+                    카테고리 : {{edit_post.post_cate}}
+                    * 카테고리는 수정이 불가능합니다.
                 </div>
-            <div class = myProfile>마광팔</div>
-        <div id="PlusContent">
-                <textarea rows="20" cols="56" placeholder="옥수수를 좋아하는 5060/7080 여러분 환영 합니다. 회비는 하루 10,000입니다. 지각비 5,000,000입니다. 현재 70대 남성 1분, 60대 여성 2분 계십니다. 감사합니다. (_ _ ) 옥수수를 좋아하는 5060/7080 여러분 환영 합니다. 회비는 하루 10,000입니다. 지각비 5,000,000입니다. 현재 70대 남성 1분, 60대 여성 2분 계십니다. 감사합니다. (_ _ ) 옥수수를 좋아하는 5060/7080 여러분 환영 합니다"></textarea>
-            </div>
-                <button type="submit"style="float:right";> 작성완료 </button>
-            </div>
+                    <button type="submit"style="float:right";> 작성완료 </button>
+                </div>
+            </form>
         </ul>
 
         <!-- 0815/백엔드 추가 -->
 
-        <form method="POST" action="{% url 'update' edit_post.post_id %}" enctype="multipart/form-data">
+        <!-- <form method="POST" action="{% url 'update' edit_post.post_id %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div>
                 제목 : <input type="text" name="post_title" value="{{edit_post.post_title}}">
@@ -151,7 +158,7 @@ input:focus {
             </div>
          
             <button type="submit" value="submit">작성 완료</button>
-        </form>
+        </form> -->
     </body>
 </html>
 
