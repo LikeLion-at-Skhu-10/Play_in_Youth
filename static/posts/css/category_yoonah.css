@@ -1,4 +1,4 @@
-body {background-color: rgb(121 172 108);}
+body {background-color: rgb(163, 198, 154);}
 
 body{
     padding:0;
@@ -71,3 +71,13 @@ a:hover {
 a:active {
     color : black;
   }
+
+  .grassSize {
+    width : 1.5em
+}
+
+.absolutePostion{
+  position:absolute;
+}
+
+

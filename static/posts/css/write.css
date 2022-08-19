@@ -39,7 +39,7 @@ li{
     padding: 3em;
 }
 
-button {
+#ClearButton {
     background-Color: #5699D6;
     border-radius: 17em;
     color: white;
@@ -86,4 +86,14 @@ p{
 }
 .container{
     min-width: 960px;
+}
+
+#PhotoButton{
+    background-Color: grey;
+    border-radius: 17em;
+    color: white;
+    border: 0;
+    height: 2.5em;
+    width: 5.5em;
+    margin-left: auto;
 }
