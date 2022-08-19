@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/category.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/categoryContent.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/myModal.css'%}" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+
+
+  <body>
+    <header>
+      <div class="logoImage">
+        <a href="#"><img src="{% static 'posts/img/becomelogo.png'%}" /></a>
+      </div>
+      <div class="finder">
+        <input placeholder="검색" />
+        <button class="finder_button">검색</button>
+      </div>
+      {% if user.is_active %} 
+        <div class="header_right"><a href="{% url 'mypage' user.id %}">내 정보</a> | <a href="{% url 'logout' %}">로그아웃</a></div>
+      {% else %}
+        <div class="header_right"><a href="{% url 'signup' %}">회원가입</a> | <a href="{% url 'signin' %}">로그인</a></div>
+      {% endif %} 
+      </header>
+
+
+    <!-- 여기서부터는 mansory layout-->
+    <content>
+        
+        <!-- cate_detail header -->
+        <div class="content_bar">
+            <button><a href="{% url 'mypage' user.id %}">내 정보</a></button>
+            <div># {{cate_name.post_cate}}</div>
+            <button><a href="{% url 'get_write' %}">글작성</a></button>
+        </div>
+        <button type="button"><a href="{% url 'category' %}">뒤로가기</a></button>
+        
+        
+        <!-- cate_detail 이미지 모임 -->
+        <div class="content_imgs">
+            {% for post in posts %}
+            <figure>
+                <a href="{% url 'cate_detail_modal' post.post_id %}"><img id="get" class="{{post.post_id}}" src="{{post.post_img.url}}" width="100" height="100" alt="image"></a>
+              <!-- 감춰진 더보기 div -->
+            </figure>
+            {% endfor %}
+        </div>
+        
+        <!-- cate_detail 모달 -->
+        
+    </content>
+    
+    {% for post in posts %}
+    <script>
+        const myImg = document.body.getElementsByTagName('img');
+        const figureEle = document.getElementsByTagName('figure');
+        const myModal = document.querySelector('.myModal');
+        const closeButton = document.querySelector('.myModal :first-child');
+
+        //마우스 올려졌을 때
+        function knowSizefunc(event) {
+          // const HideBar = document.createElement('div');
+          // const myProfile = document.createElement('div');
+          // const myPosting = document.createElement('div');
+          // const plusButton = document.createElement('button');
+          // const figureElement = event.target;
+          // const eleWidth = event.toElement.offsetWidth;
+          // const eleHeight = event.toElement.offsetHeight;
+          
+          
+        
+          //appendChild하는 부분
+          // figureElement.appendChild(HideBar);
+          // HideBar.appendChild(myProfile);
+          // HideBar.appendChild(myPosting);
+          // HideBar.appendChild(plusButton);
+        
+          //클래스리스트 추가
+          // HideBar.classList.add('hideBar');
+          // myProfile.classList.add('myProfile');
+          // myPosting.classList.add('myPosting');
+          // plusButton.classList.add('plusButton');
+        
+          //스타일의 속성 바꾸는 부분
+          // HideBar.style.width = pxtoRem(eleWidth) + `rem`;
+          // HideBar.style.height = pxtoRem(eleHeight) + `rem`;
+          // const myProfileWidth = myProfile.style.width;
+          // myProfile.style.height = myProfileWidth;
+          // myProfile.innerHTML = '{{post.author}}';
+          // myPosting.innerText = '{{post.post_title}}';
+          // plusButton.innerHTML = '더보기';
+          
+
+          //SETATTRIBUTE하는 부분
+          
+          
+
+          //eventListener하는 부분
+          
+        } 
+        // function change(id){
+        //   document.body.querySelector('.myModalContentText').textContent = id;
+        // }
+        //modal 조작하는 함수 2개
+        function showModal(event) {
+          const screenY = window.scrollY;
+          const body = document.getElementsByTagName('body')[0];
+          document.querySelector('.myModal').style.display = 'flex';
+          body.classList.add('scrollLock');
+          myModal.style.top = screenY + `px`;
+        }
+
+        function closeModal() {
+          const body = document.getElementsByTagName('body')[0];
+          document.querySelector('.myModal').style.display = 'none';
+          body.classList.remove('scrollLock');
+
+        }
+
+        //px에서 rem으로 변환하는 함수
+        // function pxtoRem(mypx) {
+        //   num = mypx * 0.0625;
+        //   return num;
+        // }
+        
+        //지연 함수
+        // function wait(sec) {
+        //   let start = Date.now(),
+        //     now = start;
+        //   while (now - start < sec * 1000) {
+        //     now = Date.now();
+        //   }
+        // }
+        
+        //마우스 out됐을때
+        // function removeElefunc(event) {
+        //   const removeEle = document.querySelector('figure :nth-child(2)');
+        //   wait(0.05);
+        //   removeEle.remove();
+        // }
+        //모든 imgs에 addEventListener해주기.
+        for (let i = 1; i < figureEle.length; i++) {
+          myImg[i].addEventListener('click',showModal);
+        }
+        closeButton.addEventListener('click', closeModal);
+        </script>
+      {% endfor %}
+  </body>
+
+</html>

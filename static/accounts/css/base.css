@@ -6,8 +6,8 @@ body {
 
 .main {
     margin: auto;
-    width: 40em;
-    min-width: 40em;
+    width: 38em;
+    min-width: 38em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,8 +18,8 @@ body {
 }
 
 .text {
-    font-size: 2.5em;
-    margin-top: 1.5em;
+    font-size: 2.8em;
+    margin-bottom: 1.2em;
 }
 
 .text2 {
@@ -29,22 +29,22 @@ body {
 
 .account {
     display: block;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
     text-indent: 1em;
     border: 0.1em solid lightgray;
-    width: 26em;
-    min-width : 26em;
-    height: 3.5em;
-    min-height: 3.5em;
+    width: 28em;
+    min-width : 28em;
+    height: 3.8em;
+    min-height: 3.8em;
 }
 
-.select {
+.quiz {
     display: block;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
     text-indent: 1em;
     border: 0.1em solid lightgray;
-    width: 26.5em;
-    min-width: 26.5em;
+    width: 28.4em;
+    min-width: 28.4em;
     height: 3.8em;
     min-height: 3.8em
 }
@@ -67,7 +67,9 @@ input::placeholder {
     font-weight: 600;
 }
 
-input:focus {outline: none;}
+input:focus {
+    outline-color: gray;
+}
 
 a {
     color: black;

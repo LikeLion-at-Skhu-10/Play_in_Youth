@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% load static %}
 
 <!DOCTYPE html>
@@ -12,21 +11,17 @@
     <div class="main" style="height:30em;min-height:30em;">
         <h1 class="text">로그인</h1>
         <div class="container">
-            <input type="nickname" placeholder="별명을 적어주세요" class="account" autofocus>
-            <input type="password" placeholder="비밀번호를 적어주세요" class="account">
-            <center><a href="#" class="find">별명 찾기</a> | <a href="#" class="find">비밀번호 찾기</a></center>
-            <button class="button">로그인</button>
+            {% if msg %} 
+                <p style="color: red;">{{msg}}</p>
+            {% endif %}
+            <form method="POST" action="{% url 'signin' %}">
+                {% csrf_token %} 
+                {{form.username}}
+                {{form.password}}
+                <a href="{% url 'find_name' %}" class="find">별명 찾기</a> | <a href="{% url 'find_pw' %}" class="find">비밀번호 찾기</a>
+                <button class="button" type="submit">로그인</button>
+            </form>
         </div>
     </div>   
 </body>
 </html>
-=======
-<h1>로그인</h1>
-<hr>
-<form method="POST" action="{% url 'signin' %}">
-    {% csrf_token %} 
-    별명 : {{form.username}}<br>
-    비번 : {{form.password}}<br>
-    <button type="submit">로그인</button>
-</form>
->>>>>>> jeen

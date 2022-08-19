@@ -198,41 +198,46 @@ width: 20em;
         left: 88%;
         bottom: -1%;">
     </div>
+
+
     <div id="flex_style">
+
         <div class="hexagon hexagon_css">
-            <a href="#">낚시</a>
+            <a href="{% url 'cate_detail' 10 %}">낚시</a>
         </div>
+        
         <div class="grid_style">
         <div class="hexagon hexagon_css">
-            <a href="#">요리</a>
+            <a href="{% url 'cate_detail' 16 %}">요리</a>
         </div>
         <div class="hexagon hexagon_css">
-            <a href="#">농사</a>
-        </div>
-        </div>
-        <div class="grid_style">
-        <div class="hexagon hexagon_css">
-            <a href="#">등산</a>
-        </div>
-        <div class="hexagon hexagon_css">
-            <a href="#">원예</a>
-        </div>
-        <div class="hexagon hexagon_css">
-            <a href="#">바둑</a>
+            <a href="{% url 'cate_detail' 11 %}">농사</a>
         </div>
         </div>
         <div class="grid_style">
         <div class="hexagon hexagon_css">
-            <a href="#">자전거</a>
+            <a href="{% url 'cate_detail' 12 %}">등산</a>
         </div>
         <div class="hexagon hexagon_css">
-             <a href="_detail/yoga">요가</a>
+            <a href="{% url 'cate_detail' 17 %}">원예</a>
+        </div>
+        <div class="hexagon hexagon_css">
+            <a href="{% url 'cate_detail' 14 %}">바둑</a>
+        </div>
+        </div>
+        <div class="grid_style">
+        <div class="hexagon hexagon_css">
+            <a href="{% url 'cate_detail' 18 %}">자전거</a>
+        </div>
+        <div class="hexagon hexagon_css">
+             <a href="{% url 'cate_detail' 15 %}">요가</a>
         </div>
         </div>
         <div class="hexagon hexagon_css">
-            <a href="category_detail/knitting">뜨개질</a>
+            <a href="{% url 'cate_detail' 13 %}">뜨개질</a>
         </div>
     </div>
 
 </body>
+
 </html>

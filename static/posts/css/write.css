@@ -97,3 +97,6 @@ p{
     width: 7.5em;
     margin-left: 1em;
 }
+.writeForm{
+    display : flex;
+}

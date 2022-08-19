@@ -5,23 +5,34 @@
 <head>
     <meta charset="UTF-8">
     <title>젊어서노세</title>
-    <meta name="viewport" content="width=device-width, initial-scale=10">
     <link rel="stylesheet" type="text/css" href="{% static 'posts/css/write.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/writeDetail.css' %}">
 </head>
 <body> 
         <div class="container">
         <h3 class="title">글 작성</h3>
-        <div id="Box">      
-            <div id="PhotoPlusBox">
-                <img src="{% static 'accounts/img/downloadbutton.png'%}">
-                <button type="submit" id="PhotoButton">눌러서 사진 추가</button>
-            </div>
-            <div class="right_bar">
-                <div class = myProfile>마광팔</div>
-                <textarea rows="20" cols="56" placeholder="내용 추가 "></textarea>
-                <button type="submit"style="float:right"; id="ClearButton"> 작성완료 </button>
-            </div>
+        <div id="Box">    
+            <form class="writeForm" method="POST" action="{% url 'write' %}" enctype="multipart/form-data">
+                {% csrf_token %}  
+                <div id="PhotoPlusBox">
+                    <img src="{% static 'accounts/img/downloadbutton.png'%}">
+                    <input type="file" name="post_img" id="fileupload" />
+                </div>
+                <div class="right_bar">
+                    <div class = myProfile>{{user.username}}</div>
+                    <input type="text" name="post_title" placeholder="제목">
+                    <textarea name="post_content" rows="20" cols="56" placeholder="내용"></textarea>
+                    <select class="select" name="post_cate"> <!--option에 name을 지정해주니까 value를 none으로 받아옴. select에 해줘야 함.-->
+                        {% for cate in post_cate %}
+                            <option value="{{cate.id}}">{{cate}}</option>
+                        {% endfor %}
+                    </select>                
+                    <button type="submit"style="float:right";> 작성완료 </button>
+                </div>
+            </form>
         </div>
-        </div>
+    </ul>
+
+    <!-- 0815/백엔드 추가 -->
 </body>
 </html>
