@@ -87,3 +87,6 @@ p{
 .container{
     min-width: 960px;
 }
+.writeForm{
+    display : flex;
+}

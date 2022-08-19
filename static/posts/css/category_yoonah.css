@@ -47,6 +47,7 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    z-index: 10000000;
   }
   .grid_style{
     grid-template-rows: repeat(2,180px);
