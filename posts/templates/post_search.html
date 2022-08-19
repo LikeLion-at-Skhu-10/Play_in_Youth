@@ -3,22 +3,15 @@
     {% if not search_list %}
     <h1> 검색 결과가 없습니다.</h1>
     {% else %}
-
-    {% for post in search_list.all %}
-    <div class="post">
-        <a href="{% url 'category_detail' post.id %}">
-            <div class="post_wrapper">
-                <p>{{posts.post_title}}</p>
-                <p>{{posts.post_content}}</p>
-                
-                <p>
-                    {% if posts.post_img %}
-                        <img srv="{{post.post_img.url}}">
-                    {% endif %}
-                </p>
-            </div>
-        </a>
-    </div>>
-    {% endfor %}
+]
+    <!-- cate_detail 이미지 모임 -->
+    <div class="content_imgs">
+        {% for post in search_list.all %}
+        <figure>
+            <img id="get" value="{{post.post_id}}" src="{{post.post_img.url}}" width="100" height="100" alt="image">
+        <!-- 감춰진 더보기 div -->
+        </figure>
+        {% endfor %}
+    </div>
     {% endif %}
 </form>
