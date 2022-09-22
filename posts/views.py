@@ -4,9 +4,10 @@ from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.utils import timezone
 from .models import Category, Post, Comment
-from .forms import CommentForm
-
+from .forms import CommentForm, PostForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.db.models import Q
 
 # Create your views here.
 def base(request):
@@ -14,6 +15,15 @@ def base(request):
 
 def main(request):
     return render(request, 'main.html')
+
+# def cate_detail(request, cate_id):
+#     post = Post.objects.filter(post_cate=cate_id)
+#     context = {'post':post}
+#     return render(request, 'category_detail.html', context)
+# def cate_detail_modal(request, post_id):
+#     post = Post.objects.get(post_id=post_id)
+#     context = {'post':post}
+#     return render(request, 'category_detail.html', context)
 
 
 def cate_detail(request, cate_id):
@@ -29,9 +39,6 @@ def cate_detail(request, cate_id):
     # posts = get_object_or_404(Category, id=id) #이렇게 하면 html에서 반복을 못함
     posts = Post.objects.filter(post_cate=cate_id)
     cate_name = posts.first()
-
-    # 각 글의 content, comment, img, author, date 가져오기(모달부분)
-
     context = {
         'posts':posts,
         'cate_name':cate_name
@@ -110,7 +117,6 @@ def edit(request, id):
     '''method==GET'''
     # edit_post = Post.objects.get(post_id=id)
     edit_post = get_object_or_404(Post, post_id=id)
-    print('img 출력 ::' , edit_post.post_img)
     # if request.method == 'POST':
     #     post = Post()
     #     user = request.user
@@ -160,7 +166,44 @@ def likes(request, id): # 이 부분에 있는 id가 urls와 같게 작성.
         like_post.post_like.add(request.user)
         like_post.like_count += 1
         like_post.save()
-    return redirect('cate_detail', like_post.post_cate.id) # id를 가져오는 방법을 모델과 관련하여 고민해봐야 함
+    # return redirect('cate_detail', cate_id) # id를 가져오는 방법을 모델과 관련하여 고민해봐야 함
+    return render(request, 'category_detail.html')
+
+# Post_Search
+# class SearchFormView(Formview):
+#     form_class = PostSearchForm
+#     template_name = 'posts/post_search.html'
+
+#     def form_valid(self, form):
+#         searchWord = form.cleaned_data['search_word']
+#         post_list = Post.objects.filter(Q(title__icontains=searchWord) | Q(description__icontains=searchWord) | Q(content__icontains=searchWord)).distinct()
+
+#         context = {}
+#         context['form'] = form
+#         context['search_term'] = searchWord
+#         context['object_list'] = post_list
+
+#         return render(self.request, self.template_name, context)
+# def search(request):
+    # content_list = Post.objects.all()
+    # context = dict()
+    # search = request.GET.get('search','')
+    # if search:
+    #     search_list = content_list.filter(Q(body__icontains = search)) # 내용만 필터
+    #     return render(request, 'post_search.html', {'search_list':search_list})
+    # else:
+    #     return render(request, 'post_search.html')
+
+    # context = dict()
+    # content_list = Post.objects.all()
+    # post = request.POST.get('post',"") #POST 요청에 따라 인자중에, post값이 있으면 가져오고, 아니면 빈 문자열 리턴
+    # if post:
+    #     search_list = content_list.filter(content__icontains=post) #post가 있으면, content에서 post내용이 있는 것만 content_list에 넣어줌.
+    #     context['content_list'] = search_list
+    #     context['post'] = post
+    #     return render(request, 'post_search.html', context) #최종적인 값이 담긴 content_list와 post를 넘겨주고
+    # else:
+    #     return render(request, 'post_search.html') #아무것도 담기지 않았다면 search.html을 렌더해준다
 
 # category_detail
 def gardening(request):

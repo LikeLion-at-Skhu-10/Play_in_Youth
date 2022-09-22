@@ -8,6 +8,8 @@ urlpatterns = [
     path('base/', views.base, name='base'),
     path('category/', views.category, name='category'),
     path('category/<str:cate_id>/', views.cate_detail, name='cate_detail'),
+    # path('category/<str:post_id>/', views.cate_detail_modal, name='cate_detail_modal'),
+    # path('category/<str:post_id>/', views.cate_detail_comment, name='cate_detail_comment'),
     path('category/<str:cate_id>/<str:post_id>/', views.cate_detail_comment, name='cate_detail_comment'),
     path('get_write/', views.get_write, name='get_write'),
     path('write/', views.write, name='write'),
@@ -15,7 +17,7 @@ urlpatterns = [
     path('update/<str:id>/', views.update, name='update'),
     path('delete/<str:id>/', views.delete, name='delete'),
     path('delete_cmt/<str:id>/', views.delete_cmt, name='delete_cmt'),
-    path('like/<str:id>/', views.likes, name="likes"),
+    path('category/<str:cate_id>/', views.likes, name="likes"),
     
     # category_detail
     path('category_detail/gardening/', views.gardening, name='gardening'),
@@ -27,4 +29,7 @@ urlpatterns = [
     path('category_detail/hiking/', views.hiking, name='hiking'),
     path('category_detail/knitting/', views.knitting, name='knitting'),
     path('category_detail/fishing/', views.fishing, name='fishing'),
-] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+    #post_search
+    # path('search', views.search, name="search"),
+] + static(settings.MEDIA_URL, document_qroot = settings.MEDIA_ROOT)
