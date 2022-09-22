@@ -53,6 +53,34 @@ def cate_detail(request, cate_id):
 3. 닫기를 누르면 댓글 사라짐.
 '''
 
+def cate_detail_comment(request, cate_id, post_id):
+    post = get_object_or_404(Post, post_id=post_id)
+
+    '''댓글'''
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.post_id = post
+            comment.comment_content = comment_form.cleaned_data['comment_content']
+            comment.comment_date = timezone.now()
+            comment.save()
+            # cate_id = post.post_cate
+            return redirect('cate_detail_comment', cate_id, post_id)
+            
+    else:
+        comment_form = CommentForm()
+        cmts = Comment.objects.filter(post_id=post_id)
+        context = {
+            'post':post,
+            'cmt_form':comment_form,
+            'cmts':cmts,
+        }
+    return render(request, 'category_detail.html', context)
+    # return redirect('cate_detail_comment')
+
+"""
 def cate_detail_comment(request, cate_id, post_id): # cate_id == '한글(예:자전거)', cate == '숫자(예:1)'
     cate = Category.objects.get(post_cate=cate_id) # cate id가 옴
     posts = Post.objects.filter(post_cate=cate_id)
@@ -82,6 +110,7 @@ def cate_detail_comment(request, cate_id, post_id): # cate_id == '한글(예:자
             'cmts':cmts,
         }
         return render(request, 'category_detail.html', context)
+"""
 
 def category(request):
     '''카테고리 육각형 모음'''
@@ -156,8 +185,10 @@ def delete_cmt (request, id):
     return redirect('mypage', user.id)
     
 # 좋아요
-def likes(request, id): # 이 부분에 있는 id가 urls와 같게 작성.
-    like_post = get_object_or_404(Post, post_id=id)
+def likes(request, cate_id): # 이 부분에 있는 id가 urls와 같게 작성.
+    # like_post = get_object_or_404(Post, post_id=post_id)
+    like_post = Post.objects.filter(post_cate=cate_id)
+    # cate = Category.objects.get(post_cate=cate_id).id
     if request.user in like_post.post_like.all(): 
         like_post.post_like.remove(request.user)
         like_post.like_count -= 1
