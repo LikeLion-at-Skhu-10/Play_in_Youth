@@ -12,13 +12,13 @@
         <h1 class="text">로그인</h1>
         <div class="container">
             {% if msg %} 
-            <p style="color: red;">{{msg}}</p>
+                <p style="color: red;">{{msg}}</p>
             {% endif %}
             <form method="POST" action="{% url 'signin' %}">
                 {% csrf_token %} 
                 {{form.username}}
                 {{form.password}}
-                <center><a href="{% url 'find_name' %}" class="find">별명 찾기</a> | <a href="{% url 'find_pw' %}" class="find">비밀번호 찾기</a></center>
+                <a href="{% url 'find_name' %}" class="find">별명 찾기</a> | <a href="{% url 'find_pw' %}" class="find">비밀번호 찾기</a>
                 <button class="button" type="submit">로그인</button>
             </form>
         </div>

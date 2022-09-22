@@ -61,16 +61,10 @@
               <div id="my_post">
                 <h1>작성 글</h1>
                 {% for post in post.all %}
+                    <p>카테고리 : {{post.post_cate}}</p>
                     <p>내용 : {{post.post_content}}</p>
                     <p>날짜 : {{post.post_date}}</p>
-                    <a href="{% url 'likes' post.post_id %}">
-                      {% if user in post.post_like.all %}
-                      좋아요 취소
-                      {% else %}
-                      좋아요
-                      {% endif %}
-                    </a>
-                    <div>좋아요 수 : {{post.post_like_count}}</div>
+                    <div>좋아요 수 : {{post.like_count}}</div>
 
                     <a href="{% url 'edit' post.post_id %}">수정하기</a>
                     <a href="{% url 'delete' post.post_id %}">삭제하기</a>

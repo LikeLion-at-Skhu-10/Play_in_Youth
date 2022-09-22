@@ -1,4 +1,29 @@
-{% load static %} 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/categoryMain.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/categoryContent.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/myModal.css'%}" />
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <header>
+      <div class="logoImage">
+        <a href="#"><img src="{% static 'posts/img/becomelogo.png'%}" /></a>
+      </div>
+      <div class="finder">
+        <input placeholder="검색" />
+        <button class="finder_button">검색</button>
+      </div>
+    </header>
+
+
 <h1>{{cate_name.post_cate}} 페이지</h1> <!--수정필요-->
 
 {% if user.is_active %} 
@@ -12,109 +37,179 @@
 {% endif %} 
 <hr>
 
+
+
+
+
+    <!-- 여기서부터는 mansory layout-->
+    <content>
+      <div class="content_bar">
+        <button>내 정보</button>
+        <button>글작성</button>
+      </div>
+      <div class="content_imgs">
+        {% for post in posts %}
+        <figure onclick="change('{{post.post_content}}','{{post.cmt_postid.all}}','{{post.author}}','{{post.post_date}}')">
+          <img src="{{post.post_img.url}}"  width="100" height="100" alt="image"/>
+          {{post.author}}
+          {{post.post_date}}
+        </figure>
+        {% endfor %}
+      </div>
+
 <button type="button"><a href="{% url 'category' %}">뒤로가기</a></button>
 
-{% for post in posts %} 
-    {% if post.post_img %} 
-    <!-- 이미지 있는 글인 경우 -->
-        <div">
-            <!-- 오리지널 화면 -->
-            <h1>/*오리지널 화면*/</h1>
-            <img src="{{post.post_img.url}}" width="100" height="100" alt="image">
 
-            <!-- 이미지에 마우스 올릴때 -->
-            <div style="background-color: gray;"><p>/*마우스 올릴때 화면*/</p>
-                <p>작성자 : {{post.author}} || 작성일 : {{post.post_date}}</p>
-                <p>내용 : {{post.post_content}}</p>
-                <button type="button"><a href="{% url 'cate_detail_comment' post.post_cate post.post_id %}">더보기</a></button>
+<!-- 모달 -->
+<div class="myModal" >
+    <button>닫기</button>
+    <div class="myModalWrapper">
+      <div class="myModalContent">
+        <img src="{{ post.post_img.url }}" class="myModalContentImage" />
+        <div class="myModalContentText">
+          <div class="myModalContentTextText">
+          </div>
+          <div class="myModalContentTextlike"><img src="{% static 'posts/img/like.png'%}" />{{post.like_count}}</div>
+        </div>
+      </div>
+      <div class="myModalSideBar">
+        <div class="myModalSideBar_comment_write"><input /><button>작성</button></div>
+        <div class="myModalSideBar_comment_written_byuser">
+          <div class="myModalSideBar_comment_written_byusername">
+            <div>{{post.author}}</div>
+            <div>{{post.post_date}}</div>
+          </div>
+            <!-- 좋아요 -->
+            {% if user.is_active %}
+            
+              {% if user in post.post_like.all %}
+              좋아요 취소
+              {% else %}
+              좋아요
+              {% endif %}
+            </a>
+            {% endif %} 
+
+        
+          <!-- 댓글 -->
+            <div>
+
+            <form method="post" action="">
+              {% csrf_token %} 
+              댓글 : {{cmt_form.comment_content}} <input type="submit" value="완료">
+            </form>
+            <p style="color: red;">로그인 후 댓글 사용 가능</p>
+            
+            <div class="commentArea">
+                <div class="commentContainer">
+                    <div class="UserName"></div>
+                    <div class="PostingDate"></div>
+                </div>
+                <div class="commentAreaText"></div>
             </div>
-
-            <!-- 모달 -->
-            <div style="background-color: skyblue;"><p>/*모달 화면*/</p>
-                <img src="{{post.post_img.url}}" width="100" height="100" alt="image">
-
-                <p>작성자 : {{post.author}} || 작성일 : {{post.post_date}}</p>
-                <p>제목 : {{post.post_title}}</p>
-                <p>내용 : {{post.post_content}}</p>  
-
-                <!-- 댓글 & 좋아요 -->
-                {% if user.is_active %} 
-                    <!-- 좋아요 -->
-                    <a href="{% url 'likes' post.post_id %}">
-                        {% if user in post.post_like.all %}
-                        좋아요 취소
-                        {% else %}
-                        좋아요
-                        {% endif %}
-                    </a>
-                {% endif %} 
-                    <div><large>👍</large>  {{post.like_count}}</div>
-                {% if user.is_active %}
-                    <!-- 댓글 -->
-                    <form method="post" action="">
-                        {% csrf_token %} 
-                        댓글 : {{cmt_form.comment_content}} <input type="submit" value="완료">
-                    </form>
-
-                {% else %}     
-                    <p style="color: red;">로그인 후 댓글 사용 가능</p>
-                {% endif %} 
-
-                {% for cmt in cmts %} 
-                    <p>{{cmt.author}} : {{cmt}}<small>  {{cmt.comment_date}}</small></p>
-                {% endfor %} 
-
             </div>
         </div>
-    {% else %} 
-    <!-- 이미지 없는 글인 경우 -->
-        <div">
-            <!-- 오리지널 화면 -->
-            <h1>/*오리지널 화면*/</h1>
-            <p>{{post.post_content}}</p>
+      </div>
+    </div>
+</div>
 
-            <!-- 이미지에 마우스 올릴때 -->
-            <div style="background-color: gray;"><p>/*마우스 올릴때 화면*/</p>
-                <p>작성자 : {{post.author}} || 작성일 : {{post.post_date}}</p>
-                <p>{{post.post_content}}</p>
-                <button type="button"><a href="{% url 'cate_detail_comment' post.post_cate post.post_id %}">더보기</a></button>
-            </div>
+<script>
+  const figureEle = document.getElementsByTagName('figure');
 
-            <!-- 모달 -->
-            <div style="background-color: skyblue;"><p>/*모달 화면*/</p>
-                <img src="{% static 'posts/img/post_default.png' %}" width="100" height="100" alt="image">
-                <p>작성자 : {{post.author}} || 작성일 : {{post.post_date}}</p>
-                <p>제목 : {{post.post_title}}</p>
-                <p>내용 : {{post.post_content}}</p>                  
+  //마우스 올려졌을 때
+  function knowSizefunc(event) {
+    const HideBar = document.createElement('div');
+    const myProfile = document.createElement('div');
+    const myPosting = document.createElement('div');
+    const plusButton = document.createElement('button');
+    const figureElement = event.target;
+    const eleWidth = event.toElement.offsetWidth;
+    const eleHeight = event.toElement.offsetHeight;
+    const myModal = document.querySelector('.myModal');
+    const closeButton = document.querySelector('.myModal :first-child');
+    const screenY = window.scrollY;
 
-                <!-- 댓글 & 좋아요 -->
-                {% if user.is_active %} 
-                    <!-- 좋아요 -->
-                    <a href="{% url 'likes' post.post_id %}">
-                        {% if user in post.post_like.all %}
-                        좋아요 취소
-                        {% else %}
-                        좋아요
-                        {% endif %}
-                    </a>
-                {% endif %} 
-                    <div><large>👍</large>  {{post.like_count}}</div>
-                {% if user.is_active %}
-                    <!-- 댓글 -->
-                    <form method="post" action="">
-                        {% csrf_token %} 
-                        댓글 : {{cmt_form.comment_content}} <input type="submit" value="완료">
-                    </form>
+    //appendChild하는 부분
+    figureElement.appendChild(HideBar);
+    HideBar.appendChild(myProfile);
+    HideBar.appendChild(myPosting);
+    HideBar.appendChild(plusButton);
 
-                {% else %}     
-                    <p style="color: red;">로그인 후 댓글 사용 가능</p>
-                {% endif %} 
+    //클래스리스트 추가
+    HideBar.classList.add('hideBar');
+    myProfile.classList.add('myProfile');
+    myPosting.classList.add('myPosting');
+    plusButton.classList.add('plusButton');
 
-                {% for cmt in cmts %} 
-                    <p>{{cmt.author}} : {{cmt}}<small>  {{cmt.comment_date}}</small></p>
-                {% endfor %} 
-            </div>
-        </div>
-    {% endif %} 
-    <hr>
-{% endfor %} 
+    //스타일의 속성 바꾸는 부분
+    HideBar.style.width = pxtoRem(eleWidth) + `rem`;
+    HideBar.style.height = pxtoRem(eleHeight) + `rem`;
+    const myProfileWidth = myProfile.style.width;
+    myProfile.style.height = myProfileWidth;
+    myProfile.innerHTML = '{{post.author}}';
+    myPosting.innerText = '{{post.post_title}}';
+    plusButton.innerHTML = '더보기';
+    myModal.style.top = screenY + `px`;
+
+    //eventListener하는 부분
+    plusButton.addEventListener('click', showModal);
+    closeButton.addEventListener('click', closeModal);
+  }
+
+  //modal 조작하는 함수 2개
+  function showModal(event) {
+    const body = document.getElementsByTagName('body')[0];
+    document.querySelector('.myModal').style.display = 'flex';
+    body.classList.add('scrollLock');
+  }
+  function closeModal() {
+    const body = document.getElementsByTagName('body')[0];
+    document.querySelector('.myModal').style.display = 'none';
+    body.classList.remove('scrollLock');
+  }
+
+  //px에서 rem으로 변환하는 함수
+  function pxtoRem(mypx) {
+    num = mypx * 0.0625;
+    return num;
+  }
+
+  //지연 함수
+  function wait(sec) {
+    let start = Date.now(),
+      now = start;
+    while (now - start < sec * 1000) {
+      now = Date.now();
+    }
+  }
+
+  //마우스 out됐을때
+  function removeElefunc(event) {
+    const removeEle = document.querySelector('figure :nth-child(2)');
+    wait(0.05);
+    removeEle.remove();
+  }
+  //이미지 클릭했을 때 모달 띄워줄꺼임 쿠쿠루삥뽕
+  function findUrl(event){
+      const selectedImgUrl = event.path[2].children[0].src;
+      const ModalContent = document.body.querySelector(".myModalContent img");
+      document.body.querySelector('.myModalContent img').src = `${selectedImgUrl}`;
+
+  }
+  //모든 imgs에 addEventListener해주기.
+  for (let i = 0; i < figureEle.length; i++) {
+    figureEle[i].addEventListener('mouseenter', knowSizefunc);
+    figureEle[i].addEventListener('mouseleave', removeElefunc);
+    figureEle[i].addEventListener('click', findUrl);
+  }
+  //안에 있는 글 내용 바꾸기
+  function change(post,comment,author,date){
+      document.body.querySelector('.myModalContentTextText').textContent = post;
+      document.body.querySelector('.commentAreaText').textContent = comment;
+      document.body.querySelector('.UserName').textContent = author;
+      document.body.querySelector('.PostingDate').textContent = date;
+
+  }
+
+</script>
+<hr>

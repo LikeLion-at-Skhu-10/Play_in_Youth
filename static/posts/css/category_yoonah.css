@@ -1,4 +1,4 @@
-body {background-color: rgb(121 172 108);}
+body {background-color: rgb(163, 198, 154);}
 
 body{
     padding:0;
@@ -47,6 +47,7 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    z-index: 10000000;
   }
   .grid_style{
     grid-template-rows: repeat(2,180px);
@@ -71,3 +72,13 @@ a:hover {
 a:active {
     color : black;
   }
+
+  .grassSize {
+    width : 1.5em
+}
+
+.absolutePostion{
+  position:absolute;
+}
+
+
