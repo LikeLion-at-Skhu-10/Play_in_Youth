@@ -49,10 +49,11 @@ def cate_detail(request, cate_id):
 
 def cate_detail_comment(request, cate_id, post_id): # cate_id == '한글(예:자전거)', cate == '숫자(예:1)'
     cate = Category.objects.get(post_cate=cate_id) # cate id가 옴
-    posts = Post.objects.filter(post_cate=cate)
+    posts = Post.objects.filter(post_cate=cate_id)
     post = get_object_or_404(Post, pk=post_id)
 
-    cmts = Comment.objects.filter(post_id=post_id)
+    # cmts = Comment.objects.filter(post_id=post_id)
+    post = post.cmt_postid.all()
     '''댓글'''
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)

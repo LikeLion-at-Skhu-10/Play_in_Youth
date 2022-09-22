@@ -101,6 +101,15 @@
 .scrollLock {
   overflow: hidden;
 }
+.commentContainer{
+  display:flex;
+}
+.PostingDate{
+  font-size:0.2em;
+  display:flex;
+  align-items: center;
+  padding-right : 2em;
+}
 
 @media screen and (max-width: 1000px) {
   .myModalWrapper {
