@@ -39,6 +39,7 @@ def cate_detail(request, cate_id):
     # posts = get_object_or_404(Category, id=id) #이렇게 하면 html에서 반복을 못함
     posts = Post.objects.filter(post_cate=cate_id)
     cate_name = posts.first()
+    
     context = {
         'posts':posts,
         'cate_name':cate_name
