@@ -1,3 +1,29 @@
 body {
     background-color: rgb(163 198 154);
 }
+*{
+    margin : 0;
+    padding : 0;
+}
+body {
+    background-color : white;
+    transition : background-color 2s;
+}
+.color{
+    background-color: rgb(163, 198, 154)
+}
+.absolutePostion{
+    position:absolute;
+}
+.grassSize {
+    width : 1.5em
+}
+
+.logo{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
