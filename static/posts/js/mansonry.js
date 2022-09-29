@@ -73,8 +73,25 @@ function removeElefunc(event) {
   wait(0.05);
   removeEle.remove();
 }
+//안에 있는 글 내용 바꾸기
+function change(post,comment,author,date){
+  document.body.querySelector('.myModalContentTextText').textContent = post;
+  document.body.querySelector('.commentAraText').textContent = comment;
+  document.body.querySelector('.UserName').textContent = author;
+  document.body.querySelector('.PostingDate').textContent = date;
+
+}
+//이미지 클릭했을 때 모달 띄워줄꺼임. 쿠쿠루삥뽕
+function findUrl(event){
+  const selectedImgUrl = event.path[2].children[0].src;
+  const ModalContent = document.body.querySelector(".myModalContent img");
+  document.body.querySelector(".myModalContent img").src = `${selectedImgUrl}`;
+}
 //모든 imgs에 addEventListener해주기.
 for (let i = 0; i < figureEle.length; i++) {
   figureEle[i].addEventListener('mouseenter', knowSizefunc);
   figureEle[i].addEventListener('mouseleave', removeElefunc);
+  figureEle[i].addEventListener('click',findUrl);
 }
+
+

@@ -29,7 +29,7 @@ def cate_detail(request, cate_id):
     # 해당 카테고리 글 다 가져오기
     # posts = get_object_or_404(Category, id=id) #이렇게 하면 html에서 반복을 못함
     posts = Post.objects.filter(post_cate=cate_id)
-    cate_name = posts.first()
+    cate_name = posts.first().post_cate
 
     # 각 글의 content, comment, img, author, date 가져오기(모달부분)
 
