@@ -1,4 +1,3 @@
-
 *{
     padding : 0;
     margin : 0;
@@ -16,14 +15,14 @@
 .title{
     text-align :center;    
     font-size: 2.5em;
-    padding: 1em 0em 2em;
+    padding: 1em 0;
 }
 
 a{
     text-decoration: none; 
 }
 
-#PhotoPlusBox{
+#Photobox{
     border:none;
     background-color: white;
     height: 27em;
@@ -33,8 +32,6 @@ a{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 5%;
-    box-shadow: 0 4px 4px -4px grey;
 }
 
 li{
@@ -89,13 +86,4 @@ p{
 }
 .container{
     min-width: 960px;
-}
-#PhotoButton{
-    background-Color: grey;
-    border-radius: 17em;
-    color: white;
-    border: 0;
-    height: 2.5em;
-    width: 7.5em;
-    margin-left: 1em;
 }

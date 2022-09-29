@@ -1,13 +1,13 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.utils import timezone
 from .models import Category, Post, Comment
-from .forms import CommentForm, PostForm
+from .forms import CommentForm
+
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.db.models import Q
 
 # Create your views here.
 def base(request):
@@ -15,15 +15,6 @@ def base(request):
 
 def main(request):
     return render(request, 'main.html')
-
-# def cate_detail(request, cate_id):
-#     post = Post.objects.filter(post_cate=cate_id)
-#     context = {'post':post}
-#     return render(request, 'category_detail.html', context)
-# def cate_detail_modal(request, post_id):
-#     post = Post.objects.get(post_id=post_id)
-#     context = {'post':post}
-#     return render(request, 'category_detail.html', context)
 
 
 def cate_detail(request, cate_id):
@@ -39,7 +30,9 @@ def cate_detail(request, cate_id):
     # posts = get_object_or_404(Category, id=id) #이렇게 하면 html에서 반복을 못함
     posts = Post.objects.filter(post_cate=cate_id)
     cate_name = posts.first()
-    
+
+    # 각 글의 content, comment, img, author, date 가져오기(모달부분)
+
     context = {
         'posts':posts,
         'cate_name':cate_name
@@ -54,41 +47,12 @@ def cate_detail(request, cate_id):
 3. 닫기를 누르면 댓글 사라짐.
 '''
 
-def cate_detail_comment(request, cate_id, post_id):
-    post = get_object_or_404(Post, post_id=post_id)
-
-    '''댓글'''
-    if request.method == 'POST':
-        comment_form = CommentForm(request.POST)
-        if comment_form.is_valid():
-            comment = comment_form.save(commit=False)
-            comment.author = request.user
-            comment.post_id = post
-            comment.comment_content = comment_form.cleaned_data['comment_content']
-            comment.comment_date = timezone.now()
-            comment.save()
-            # cate_id = post.post_cate
-            return redirect('cate_detail_comment', cate_id, post_id)
-            
-    else:
-        comment_form = CommentForm()
-        cmts = Comment.objects.filter(post_id=post_id)
-        context = {
-            'post':post,
-            'cmt_form':comment_form,
-            'cmts':cmts,
-        }
-    return render(request, 'category_detail.html', context)
-    # return redirect('cate_detail_comment')
-
-"""
 def cate_detail_comment(request, cate_id, post_id): # cate_id == '한글(예:자전거)', cate == '숫자(예:1)'
     cate = Category.objects.get(post_cate=cate_id) # cate id가 옴
-    posts = Post.objects.filter(post_cate=cate_id)
+    posts = Post.objects.filter(post_cate=cate)
     post = get_object_or_404(Post, pk=post_id)
 
-    # cmts = Comment.objects.filter(post_id=post_id)
-    post = post.cmt_postid.all()
+    cmts = Comment.objects.filter(post_id=post_id)
     '''댓글'''
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
@@ -111,7 +75,6 @@ def cate_detail_comment(request, cate_id, post_id): # cate_id == '한글(예:자
             'cmts':cmts,
         }
         return render(request, 'category_detail.html', context)
-"""
 
 def category(request):
     '''카테고리 육각형 모음'''
@@ -147,6 +110,7 @@ def edit(request, id):
     '''method==GET'''
     # edit_post = Post.objects.get(post_id=id)
     edit_post = get_object_or_404(Post, post_id=id)
+    print('img 출력 ::' , edit_post.post_img)
     # if request.method == 'POST':
     #     post = Post()
     #     user = request.user
@@ -186,10 +150,8 @@ def delete_cmt (request, id):
     return redirect('mypage', user.id)
     
 # 좋아요
-def likes(request, cate_id): # 이 부분에 있는 id가 urls와 같게 작성.
-    # like_post = get_object_or_404(Post, post_id=post_id)
-    like_post = Post.objects.filter(post_cate=cate_id)
-    # cate = Category.objects.get(post_cate=cate_id).id
+def likes(request, id): # 이 부분에 있는 id가 urls와 같게 작성.
+    like_post = get_object_or_404(Post, post_id=id)
     if request.user in like_post.post_like.all(): 
         like_post.post_like.remove(request.user)
         like_post.like_count -= 1
@@ -198,44 +160,7 @@ def likes(request, cate_id): # 이 부분에 있는 id가 urls와 같게 작성.
         like_post.post_like.add(request.user)
         like_post.like_count += 1
         like_post.save()
-    # return redirect('cate_detail', cate_id) # id를 가져오는 방법을 모델과 관련하여 고민해봐야 함
-    return render(request, 'category_detail.html')
-
-# Post_Search
-# class SearchFormView(Formview):
-#     form_class = PostSearchForm
-#     template_name = 'posts/post_search.html'
-
-#     def form_valid(self, form):
-#         searchWord = form.cleaned_data['search_word']
-#         post_list = Post.objects.filter(Q(title__icontains=searchWord) | Q(description__icontains=searchWord) | Q(content__icontains=searchWord)).distinct()
-
-#         context = {}
-#         context['form'] = form
-#         context['search_term'] = searchWord
-#         context['object_list'] = post_list
-
-#         return render(self.request, self.template_name, context)
-# def search(request):
-    # content_list = Post.objects.all()
-    # context = dict()
-    # search = request.GET.get('search','')
-    # if search:
-    #     search_list = content_list.filter(Q(body__icontains = search)) # 내용만 필터
-    #     return render(request, 'post_search.html', {'search_list':search_list})
-    # else:
-    #     return render(request, 'post_search.html')
-
-    # context = dict()
-    # content_list = Post.objects.all()
-    # post = request.POST.get('post',"") #POST 요청에 따라 인자중에, post값이 있으면 가져오고, 아니면 빈 문자열 리턴
-    # if post:
-    #     search_list = content_list.filter(content__icontains=post) #post가 있으면, content에서 post내용이 있는 것만 content_list에 넣어줌.
-    #     context['content_list'] = search_list
-    #     context['post'] = post
-    #     return render(request, 'post_search.html', context) #최종적인 값이 담긴 content_list와 post를 넘겨주고
-    # else:
-    #     return render(request, 'post_search.html') #아무것도 담기지 않았다면 search.html을 렌더해준다
+    return redirect('cate_detail', like_post.post_cate.id) # id를 가져오는 방법을 모델과 관련하여 고민해봐야 함
 
 # category_detail
 def gardening(request):

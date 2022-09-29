@@ -44,7 +44,3 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.comment_content
-
-# class PostComment(models.Model):
-#     mid_id = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='mid_id')
-#     post = 

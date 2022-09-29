@@ -10,7 +10,6 @@ body {
     min-width: 38em;
     display: flex;
     justify-content: center;
-    text-align: center;
     align-items: center;
     flex-direction: column;
     border: 0.1em solid lightgrey;

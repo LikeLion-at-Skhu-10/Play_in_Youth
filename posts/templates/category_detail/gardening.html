@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/category.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/categoryMain.css'%}" />
     <link rel="stylesheet" type="text/css" href="{% static 'posts/css/categoryContent.css'%}" />
     <link rel="stylesheet" type="text/css" href="{% static 'posts/css/myModal.css'%}" />
 
@@ -21,35 +21,21 @@
         <input placeholder="검색" />
         <button class="finder_button">검색</button>
       </div>
-      {% if user.is_active %} 
-        <div class="header_right"><a href="{% url 'mypage' user.id %}">내 정보</a> | <a href="{% url 'logout' %}">로그아웃</a></div>
-      {% else %}
-        <div class="header_right"><a href="{% url 'signup' %}">회원가입</a> | <a href="{% url 'signin' %}">로그인</a></div>
-      {% endif %} 
-      </header>
+      <div class="header_right"><a href="#">내 정보</a> | <a href="#">로그아웃</a></div>
+    </header>
 
     <!-- 여기서부터는 mansory layout-->
     <content>
       <div class="content_bar">
-        <button><a href="{% url 'mypage' user.id %}">내 정보</a></button>
-        <div># {{cate_name.post_cate}}</div>
-        <button><a href="{% url 'get_write' %}">글작성</a></button>
+        <button>내 정보</button>
+        <div>#농사</div>
+        <button>글작성</button>
       </div>
-      <button type="button"><a href="{% url 'category' %}">뒤로가기</a></button>
-      
-      
       <div class="content_imgs">
-        {% for post in posts %}
         <figure>
-          {% if post.post_img %}
-          <!-- 이미지 있는 글인 경우 -->
-            <img src="{{post.post_img.url}}" width="100" height="100" alt="image">
-          {% else %} 
-          <!-- 이미지 없는 글인 경우 -->
-            {{post.post_content}}
-          {% endif %} 
+          <img src="{% static 'posts/img/img01.jpg'%}" />
         </figure>
-        <!-- <figure>
+        <figure>
           <img src="{% static 'posts/img/img02.jpg'%}" />
         </figure>
         <figure>
@@ -99,62 +85,34 @@
         </figure>
         <figure>
           <img src="{% static 'posts/img/img15.jpg'%}" />
-        </figure> -->
+        </figure>
       </div>
 
       <div class="myModal">
         <button>닫기</button>
         <div class="myModalWrapper">
           <div class="myModalContent">
-            <img src="{{post.post_img.url}}" class="myModalContentImage" />
+            <img src="{% static 'posts/img/img01.jpg'%}" class="myModalContentImage" />
             <div class="myModalContentText">
               <div class="myModalContentTextText">
-                작성자 : {{post.author}} || 작성일 : {{post.post_date}}<br>
-                제목 : {{post.post_title}}
+                옥수수를 좋아하는 5060/7080 여러분 환영 합니다. 회비는 하루 10,000입니다. 지각비 5,000,000입니다. 현재 70대 남성 1분, 60대 여성 2분 계십니다. 감사합니다. 옥수수를 좋아하는 5060/7080 여러분 환영 합니다. 회비는 하루 10,000입니다. 지각비
+                5,000,000입니다. 현재 70대 남성 1분, 60대 여성 2분 계십니다. 감사합니다. 옥수수를 좋아하는 5060/7080 여러분 환영 합니다. 회비는 하루 10,000입니다. 지각비 5,000,000입니다. 현재 70대 남성 1분, 60대 여성 2분 계십니다. 감사합니다.
+                옥수수를 좋아하는 5060/7080 여러분 환영 합니다. 회비는 하루 10,000입니다. 지각비 5,000,000입니다. 현재 70대 남성 1분, 60대 여성 2분 계십니다. 감사합니다. 가입 문의 : 010-1234-5678
               </div>
-              <div class="myModalContentTextText">
-                {{post.post_content}}
-              </div>
-              <div class="myModalContentTextlike">
-                <img src="{% static 'posts/img/like.png'%}" />{{post.like_count}}
-                {% if user.is_active %}
-                  <a href="{% url 'likes' post.post_id %}">
-                    {% if user in post.post_like.all %}
-                    좋아요 취소
-                    {% else %}
-                    좋아요
-                    {% endif %}
-                  </a>
-                {% endif %}
-
-              </div>
+              <div class="myModalContentTextlike"><img src="{% static 'posts/img/like.png'%}" />37</div>
             </div>
           </div>
           <div class="myModalSideBar">
-            {% if user.is_active %}
-            <div class="myModalSideBar_comment_write">
-              <form method="post" action="">
-                {% csrf_token %} 
-                {{cmt_form.comment_content}}<input type="submit" value="작성">
-              </form>
-            </div>
-            {% else %}     
-              <p style="color: red;">로그인 후 댓글 사용 가능</p>
-            {% endif %} 
-
+            <div class="myModalSideBar_comment_write"><input /><button>작성</button></div>
             <div class="myModalSideBar_comment_written_byuser">
-              {% for cmt in cmts %}
               <div class="myModalSideBar_comment_written_byusername">
-                <div>{{cmt.author}}</div>
-                <div>{{cmt.comment_date}}</div>
+                <div>수진</div>
+                <div>2022.07.01</div>
               </div>
-              <div>{{cmt}}</div>
-              {% endfor %} 
+              <div>옥수수.. 썩은거 아닌가요..</div>
             </div>
           </div>
         </div>
-        <hr>
-        {% endfor %}
       </div>
     </content>
     <script src="{% static 'posts/js/mansonry.js'%}"></script>
