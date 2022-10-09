@@ -8,6 +8,11 @@
     <title>젊어서노세 - 로그인</title>
 </head>
 <body>
+    <div class="BG_button">
+        <article class="BG_change">
+            <h3>배경효과<br>끄기</h3>
+        </article>
+    </div>
     <div class="main" style="height:30em;min-height:30em;">
         <h1 class="text">로그인</h1>
         <div class="container">
@@ -18,7 +23,7 @@
                 {% csrf_token %} 
                 {{form.username}}
                 {{form.password}}
-                <a href="{% url 'find_name' %}" class="find">별명 찾기</a> | <a href="{% url 'find_pw' %}" class="find">비밀번호 찾기</a>
+                <center><a href="{% url 'find_name' %}" class="find">별명 찾기</a> | <a href="{% url 'find_pw' %}" class="find">비밀번호 찾기</a></center>
                 <button class="button" type="submit">로그인</button>
             </form>
         </div>

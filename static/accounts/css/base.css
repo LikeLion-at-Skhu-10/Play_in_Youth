@@ -1,7 +1,43 @@
+:root {
+    --colorful: linear-gradient(
+        45deg,
+        #845ec2,
+        #d65db1, 
+        #ff6f91, 
+        #ff9671,
+        #ffc75f,
+        #f9f871
+    );
+
+    --BWcolor: linear-gradient(
+        30deg,
+        #6877ff,
+        #acf2ff
+    );
+}
+
 body {
     background-color: #EFF7FC;
+    background-image: var(--colorful);
+    background-size: 400%;
+    animation: PastelRainbow 4s infinite alternate;
     display: flex;
     height: 100vh;
+}
+
+@keyframes PastelRainbow {
+    0% {background-position: left;}
+    100% {background-position: right;}
+}
+
+.BG_change {
+    width: 7em;
+    height: 7em;
+    justify-content: center;
+    text-align: center;
+    float: left;
+    border-radius: 10em;
+    background-color: #c4e8ff;
 }
 
 .main {
@@ -9,10 +45,12 @@ body {
     width: 38em;
     min-width: 38em;
     display: flex;
+    transform: translate(-10%);
     justify-content: center;
+    text-align: center;
     align-items: center;
     flex-direction: column;
-    border: 0.1em solid lightgrey;
+    border: none;
     border-radius: 1em;
     background-color: #f1f1f1;
 }
