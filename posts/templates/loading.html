@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel = "stylesheet" href="{% static 'posts/css/loading.css' %}">
+    <link rel = "stylesheet" href="{% static 'posts/css/loading.scss' %}">
+</head>
+<body>
+        <div class="wrapper">
+            <div class="container">
+                <ul class="slider">
+                    <li class="item">
+                        <img src="{% static 'posts/img/loading1.png'%}" class="yeb"
+                        class="yeb">
+                    </li>
+                    <li class="item">
+                        <img src="{% static 'posts/img/loading2.png'%}" class="yeb">
+                    </li>
+                    <li class="item">
+                        <img src="{% static 'posts/img/loading3.png'%}" class="yeb">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    <script src="{% static 'posts/js/loading.js'%}"></script>
+</body>
+</html>
