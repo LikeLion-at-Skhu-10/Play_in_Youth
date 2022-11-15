@@ -14,11 +14,18 @@
     <div class="main" style="height:37em;min-height:37em;">
         <h1 class="text">비밀번호 찾기</h1>
         <div class="container">
-            <input type="phone_number" placeholder="전화번호를 적어주세요" class="account" autofocus>
-            <input type="nickname" placeholder="별명을 적어주세요" class="account" autofocus>
-            <input type="" placeholder="질문 넣는 빈칸" class="account">
-            <input type="password" placeholder="질문에 대한 답을 적어주세요" class="account">
-            <button class="button">다음</button>
+            <form action="{% url 'find_pw' %}" method="POST">
+                {% csrf_token %}
+                <input type="phone_number" placeholder="전화번호를 적어주세요" class="account" name="find_name_phone_num" autofocus>
+                <input type="nickname" placeholder="별명을 적어주세요" class="account" name="find_name_nickname" autofocus>
+                <select class="account" name="quiz"> 
+                    {% for q in quiz %}
+                        <option value="{{q}}">{{q}}</option>
+                    {% endfor %}
+                </select>
+                <input type="text" placeholder="질문에 대한 답을 적어주세요" class="account" name="find_name_answer">
+                <button type="submit" class="button">다음</button>
+            </form>
         </div>
     </div>   
 </body>

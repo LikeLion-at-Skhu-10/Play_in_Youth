@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel ="stylesheet" type="text/css" href="{% static 'accounts/css/base.css' %}">
+    <title>젊어서노세 - 비밀번호 찾기</title>
+</head>
+<body>
+    <div class="main" style="height:37em;min-height:37em;">
+        <h1 class="text">별명 찾기</h1>
+        <div class="container">
+            <form action="{% url 'return_name' %}" method="POST">
+                {% csrf_token %}
+                <p>별명 : {{ correct_user.username }}</p>
+                <p><a href="{% url 'find_pw' %}">비밀번호 찾기</a></p>
+            </form>
+        </div>
+    </div>   
+</body>
+</html>

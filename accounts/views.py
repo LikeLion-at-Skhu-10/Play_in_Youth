@@ -5,9 +5,13 @@ from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate
 from .forms import UserForm
-from .models import User
+from .models import User, Quiz
 from posts.models import Comment
 from posts.views import Post
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from accounts.forms import CustomPasswordChangeForm, SetPasswordForm
 
 # Create your views here.
 def signup(request):
@@ -59,13 +63,95 @@ def logout(request):
     return redirect('category')
 
 def find_pw(request):
-    return render(request, 'find_pw.html')
+    if request.method == 'POST':
+        phone_num = request.POST.get('find_name_phone_num')
+        filted_user = User.objects.filter(phone = phone_num).first()
+        correct_user = get_object_or_404(User, id=filted_user.id)
+        username =  request.POST.get('find_name_nickname')
+        answer = request.POST.get('find_name_answer')
+        if phone_num ==  correct_user.phone:
+            if correct_user.answer == answer:
+                if str(correct_user) == str(username):
+                    return redirect('reset_pw', correct_user.id)
+                    # return render(request, 'reset_pw.html', {'correct_user':correct_user})
+                else:
+                    quiz = Quiz.objects.all() 
+                return render(request, 'find_pw.html', {'quiz':quiz})
+            else:
+                quiz = Quiz.objects.all() 
+                return render(request, 'find_pw.html', {'quiz':quiz})
+        else:
+            quiz = Quiz.objects.all() 
+            render(request, 'find_pw.html', {'quiz':quiz})
+    else:
+        quiz = Quiz.objects.all()        
+        return render(request, 'find_pw.html', {'quiz':quiz})
 
 def find_name(request):
-    return render(request, 'find_name.html')
+    if request.method == 'POST':
+        phone_num = request.POST.get('find_name_phone_num')
+        filted_user = User.objects.filter(phone = phone_num).first()
+        correct_user = get_object_or_404(User, id=filted_user.id)
+        answer = request.POST.get('find_name_answer')
+        if phone_num ==  correct_user.phone:
+            if correct_user.answer == answer:
+                return render(request, 'return_name.html', {'correct_user':correct_user})
+            else:
+                quiz = Quiz.objects.all() 
+                return render(request, 'find_name.html', {'quiz':quiz})
+        else:
+            quiz = Quiz.objects.all() 
+            render(request, 'find_name.html', {'quiz':quiz})
+    else:
+        quiz = Quiz.objects.all()        
+        return render(request, 'find_name.html', {'quiz':quiz})
 
-def reset_pw(request):
-    return render(request, 'reset_pw.html')
+
+
+def return_name(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+    return render(request, 'return_name.html', user.id)
+
+# def reset_pw(request):
+#     if request.method == 'POST':
+#         form = SetPasswordForm(request.user, request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             update_session_auth_hash(request, user)
+#             messages.success(request,
+#                              'Your password was successfully updated!',
+#                              extra_tags='alert-success')
+#             return redirect('mypage')
+#         else:
+#             form = PasswordChangeForm(request.user)
+#         return render(request, 'reset_pw.html', {
+#             'form': form,
+#             # 'current_user': current_user_name,
+#             # 'user_avatar': current_user_avatar
+#         }) 
+
+def reset_pw(request, id):
+    """
+    Complete the password reset procedure.
+    """
+    id = get_object_or_404(User, id=id)
+    if request.method == 'POST':
+        form = SetPasswordForm(user=id, data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.info(request, "Thank you! Your password has been reset. Please log in below.")
+            return redirect('signin')
+    else:
+        form = SetPasswordForm(user=id)
+        return render(request, 'reset_pw.html', {
+            'title': 'Set Password',
+            'form': form,
+            'description': "Please enter a new password for your account.",
+            'action': 'Continue',
+        }) 
 
 def mypage(request, id):
     '''
