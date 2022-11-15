@@ -1,28 +1,55 @@
+* { box-sizing: border-box; }
+
 :root {
+    --default: linear-gradient(
+        #EFF7FC,
+        #EFF7FC
+        );
+
     --colorful: linear-gradient(
-        45deg,
+        50deg,
         #845ec2,
-        #d65db1, 
-        #ff6f91, 
+        #d65db1,
+        #ff6f91,
         #ff9671,
         #ffc75f,
         #f9f871
     );
 
-    --BWcolor: linear-gradient(
+    --colorful2: linear-gradient(
         30deg,
-        #6877ff,
-        #acf2ff
+        #7BA13D,
+        #29A24E,
+        #00906E,
+        #00698E,
+        #0038A0,
+        #06078E
+    );
+
+    --rainbow: linear-gradient(
+        140deg,
+        /* #ff9a9a,
+        #ffb29a,
+        #ffc19a,
+        #ffd19a,
+        #f8ff9a, */
+        #ecff9a,
+        #d0ff9a,
+        #9aff9a,
+        #9affcd,
+        #9affe1,
+        #9af3ff,
+        #9abdff,
+        #c99aff,
+        #ff9ae1
     );
 }
 
-body {
-    background-color: #EFF7FC;
-    background-image: var(--colorful);
-    background-size: 400%;
-    animation: PastelRainbow 4s infinite alternate;
-    display: flex;
-    height: 100vh;
+@font-face {
+    font-family: 'ChosunCentennial';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @keyframes PastelRainbow {
@@ -30,22 +57,54 @@ body {
     100% {background-position: right;}
 }
 
-.BG_change {
-    width: 7em;
-    height: 7em;
-    justify-content: center;
-    text-align: center;
-    float: left;
-    border-radius: 10em;
-    background-color: #c4e8ff;
+body {
+    background-image: var(--default);
+    background-size: 400%;
+    animation: PastelRainbow 4s infinite alternate;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
 }
 
+.BG-btn {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 6.5em;
+    height: 6.5em;
+    float: left;
+    border-radius: 50%;
+    /* border: 1rem groove #c4e8ff; */
+    background-color: #fac4ff;
+    box-shadow: 0.5rem 0.5rem 1rem rgb(0, 0, 0, 0.3);
+}
+
+.BG-btn:active {
+    position: relative;
+    box-shadow: none;
+    top: 1rem;
+    left: 1rem;
+}
+
+.BG-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.BG-btn:hover { cursor: pointer; }
+
 .main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     margin: auto;
     width: 38em;
     min-width: 38em;
     display: flex;
-    transform: translate(-10%);
     justify-content: center;
     text-align: center;
     align-items: center;
@@ -55,9 +114,12 @@ body {
     background-color: #f1f1f1;
 }
 
+h1 { margin-top: 0em; }
+
 .text {
+    font-family: 'ChosunCentennial';
     font-size: 2.8em;
-    margin-bottom: 1.2em;
+    margin-bottom: 0.8em;
 }
 
 .text2 {
@@ -65,7 +127,7 @@ body {
     text-align: center;
 }
 
-.account {
+input {
     display: block;
     margin-bottom: 2em;
     text-indent: 1em;
@@ -76,15 +138,15 @@ body {
     min-height: 3.8em;
 }
 
-.quiz {
+select {
     display: block;
     margin-bottom: 2em;
     text-indent: 1em;
     border: 0.1em solid lightgray;
-    width: 28.4em;
-    min-width: 28.4em;
-    height: 3.8em;
-    min-height: 3.8em
+    width: 28em;
+    min-width: 28em;
+    height: 3.7em;
+    min-height: 3.7em
 }
 
 .button {

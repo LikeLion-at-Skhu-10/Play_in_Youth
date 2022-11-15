@@ -8,25 +8,27 @@
     <title>젊어서노세 - 로그인</title>
 </head>
 <body>
-    <div class="BG_button">
-        <article class="BG_change">
-            <h3>배경효과<br>끄기</h3>
-        </article>
+    <div class="BG-btn">
+        <div class="BG-text">배경색<br>변경</div>
     </div>
-    <div class="main" style="height:30em;min-height:30em;">
-        <h1 class="text">로그인</h1>
+    <div class="main" style="height:33em;min-height:33em;">
+        <h1 class="text">
+            <a href="javascript:history.back()"><img width="230px" src="{% static 'posts/img/becomelogo.png'%}" /></a><br>
+            로그인
+        </h1>
         <div class="container">
             {% if msg %} 
                 <p style="color: red;">{{msg}}</p>
             {% endif %}
             <form method="POST" action="{% url 'signin' %}">
-                {% csrf_token %} 
-                {{form.username}}
-                {{form.password}}
+                {% csrf_token %}  
+                <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username" placeholder="별명을 입력하세요">
+                <input type="password" name="password" autocomplete="current-password" required="" id="id_password" placeholder="비밀번호를 입력하세요">
                 <center><a href="{% url 'find_name' %}" class="find">별명 찾기</a> | <a href="{% url 'find_pw' %}" class="find">비밀번호 찾기</a></center>
                 <button class="button" type="submit">로그인</button>
             </form>
         </div>
     </div>   
 </body>
+<script type="text/javascript" src="{% static 'accounts/js/base.js' %}"></script>
 </html>

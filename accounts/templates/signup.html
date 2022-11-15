@@ -9,24 +9,32 @@
     <title>젊어서노세 - 회원가입</title>
 </head>
 <body>
-    <div class="main" style="height:50em;min-height:50em;">
-        <h1 class="text">회원가입</h1>
+    <div class="BG-btn">
+        <div class="BG-text">배경색<br>변경</div>
+    </div>
+    <div class="main" style="height:52em;min-height:52em;">
+        <h1 class="text">
+            <a href="javascript:history.back()"><img width="230px" src="{% static 'posts/img/becomelogo.png'%}" /></a><br>
+            회원가입
+        </h1>
         <div class="container">
             <form action="{% url 'signup' %}" method="POST">
-                {% csrf_token %} 
-                {% if msg %} 
-                    <p style="color: red;">{{msg}}</p>
-                {% endif %}
-                {{form.username}}
-                {{form.password1}}
-                {{form.password2}}
-                {{form.phone}}
-                {{form.quiz}}
-                {{form.answer}}
+                {% csrf_token %}  
+                <input type="text" name="username" maxlength="150" autofocus="" required="" id="id_username" placeholder="사용할 별명을 입력하세요">
+                <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1" placeholder="사용할 비밀번호를 입력하세요">
+                <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2" placeholder="사용할 비밀번호를 다시 입력하세요">
+                <input type="text" name="phone" maxlength="100" required="" id="id_phone" placeholder="전화번호를 입력하세요">
+                <select name="quiz" required="" id="id_quiz">
+                    <option value="" selected="">---------</option>
+                    <option value="1">자신이 다녔던 초등학교의 이름은 무엇인가요?</option>
+                    <option value="2">처음 키웠던 반려동물의 이름은 무엇인가요?</option>
+                </select>
+                <input type="text" name="answer" maxlength="200" required="" id="id_answer" placeholder="질문에 대한 답을 입력하세요">
                 <center><a href="{% url 'find_name' %}" class="find">별명 찾기</a> | <a href="{% url 'find_pw' %}" class="find">비밀번호 찾기</a></center>
                 <button class="button" type="submit">회원가입</button>
             </form>
         </div>
     </div>
 </body>
+<script type="text/javascript" src="{% static 'accounts/js/base.js' %}"></script>
 </html>
