@@ -1,0 +1,61 @@
+{% load static %} 
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/categoryMain.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/categoryContent.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/myModal.css'%}" />
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <header>
+      <div class="logoImage">
+        <a href="#"><img src="{% static 'posts/img/becomelogo.png'%}" /></a>
+      </div>
+      <div class="finder">
+        <input placeholder="검색" />
+        <button class="finder_button">검색</button>
+      </div>
+      <div class="header_right">
+        {% if user.is_active %} 
+        <p>{{user.username}}님 안녕하세요.</p>
+        <a href="{% url 'get_write' %}">글쓰기</a>
+        <a href="{% url 'mypage' user.id %}">내 정보</a>
+        <a href="{% url 'logout' %}">로그아웃</a>
+        {% else %}
+        <a href="{% url 'signup' %}">회원가입</a>
+        <a href="{% url 'signin' %}">로그인</a>
+        {% endif %} 
+        <hr>
+      </div>
+    </header>
+
+    <button type="button"><a href="{% url 'category' %}">뒤로가기</a></button>
+
+    <content>
+      <div class="content_bar">
+        <button>내 정보</button>
+        <div>#{{cate_id}} 페이지</div>
+        <button>글작성</button>
+      </div>
+      <div class="content_imgs">
+        {% for post in posts %}
+
+
+
+            <figure onclick="change('{{post.post_content}}','{{post.cmt_postid.all}}','{{post.author}}','{{post.post_date}}')">
+                <a href="{% url 'test_comment' post.id %}"><img src="{{post.post_img.url}}" /></a>
+            </figure>
+        {% endfor %}
+      </div>
+
+    </content>
+    <!-- <script src="{% static 'posts/js/mansonry.js'%}"></script> -->
+  </body>
+</html>

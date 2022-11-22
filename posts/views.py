@@ -16,6 +16,18 @@ def base(request):
 def main(request):
     return render(request, 'main.html')
 
+def test_detail(request, cate_id):
+
+    posts = Post.objects.filter(post_cate=cate_id)
+
+    context = {
+        'posts' : posts,
+        'cate_id' : cate_id
+    }
+    return render(request, 'test_detail.html', context)
+
+def test_comment(request, cate_id):
+    return render(request, 'test_comment.html', cate_id)
 
 def cate_detail(request, cate_id):
     '''
@@ -174,7 +186,7 @@ def yoga(request, yoga):
     category = Post.objects.filter(category=yoga)
     return render(request, 'category_detail/yoga.html',{'category':category})
 
-# def bicycle(request, cate):
+# def bicycle(request):
 #     # category_posts = posts.filter(post_cate='자전거')
 #     return render(request, 'category_detail/bicycle.html', cate)
 

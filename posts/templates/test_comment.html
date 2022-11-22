@@ -1,0 +1,41 @@
+
+
+  <div class="myModal">
+    <a href="{% url 'test_detail' cate_id %}">닫기</a>
+    <div class="myModalWrapper">
+      <div class="myModalContent">
+        <img src="{% static 'posts/img/img01.jpg'%}" class="myModalContentImage" />
+        <div class="myModalContentText">
+          <div class="myModalContentTextText">
+            글 내용 : {{post.post_content}}
+          </div>
+          <div class="myModalContentTextlike"><img src="{% static 'posts/img/like.png'%}" />37</div>
+        </div>
+      </div>
+      <div class="myModalSideBar">
+        <div class="myModalSideBar_comment_write"><input /><button>작성</button></div>
+        <div class="myModalSideBar_comment_written_byuser">
+          <div class="myModalSideBar_comment_written_byusername">
+            <div>작성자 : {{post.post_author}}</div>
+            <div>작성일 : {{post.post_date}}</div>
+          </div>
+          <div>
+            <!-- 댓글 & 좋아요 -->
+            {% if user.is_active %}
+                <!-- 댓글 -->
+                <form method="post" action="">
+                    {% csrf_token %} 
+                    댓글 : {{cmt_form.comment_content}} <input type="submit" value="완료">
+                </form>
+            {% else %}     
+              <p style="color: red;">로그인 후 댓글 사용 가능</p>
+            {% endif %} 
+            {% for cmt in cmts %} 
+              <p>{{cmt.author}} : {{cmt}}<small>  {{cmt.comment_date}}</small></p>
+            {% endfor %} 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'posts/js/mansonry.js'%}"></script>
