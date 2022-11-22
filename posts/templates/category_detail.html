@@ -47,7 +47,7 @@
       <div class="content_imgs">
         {% for post in posts %}
         <figure onclick="change('{{post.post_content}}','{{post.cmt_postid.all}}','{{post.author}}','{{post.post_date}}')">
-          <img src="{{post.post_img.url}}" />
+          <img src="{{post.post_imgs}}" />
         </figure>
         {% endfor %}
       </div>

@@ -31,6 +31,7 @@ def cate_detail(request, cate_id):
     posts = Post.objects.filter(post_cate=cate_id)
     cate_name = posts.first().post_cate
 
+
     # 각 글의 content, comment, img, author, date 가져오기(모달부분)
 
     context = {
