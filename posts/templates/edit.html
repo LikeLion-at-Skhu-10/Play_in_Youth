@@ -7,7 +7,7 @@
      <link rel="stylesheet" type="text/css" href="{% static 'posts/css/edit.css' %}">
     </head>
     <body>
-        <div class="edit_title">글 수정</div>
+        <div class="edit_title"><h4>글 수정</h4></div><br>
         <!-- 0815/백엔드 추가 -->
         <div class="entire_wrapper">
             <div class="post_img">
@@ -17,12 +17,25 @@
                 {% csrf_token %}
 
                     <div class = myProfile>마광팔</div>
-                    업로드 사진 : <input type="file" name="post_img" id="fileupload" placeholder="{{edit_post.post_img.url}}"/>
+                     <input type="file" name="post_img" id="fileupload" placeholder="{{edit_post.post_img.url}}"/>
                     <textarea name="post_content" cols="80" rows="30">{{edit_post.post_content}}</textarea>
                     <button type="submit" value="submit">작성 완료</button>
             </form>
             
         </div>
     </body>
+    <script>
+             function setThumbnail(event) {
+        var reader = new FileReader();
+
+        reader.onload = function(event) {
+          var img = document.createElement("img");
+          img.setAttribute("src", event.target.result);
+          document.querySelector("div#PhotoPlusBox").appendChild(img);
+        };
+
+        reader.readAsDataURL(event.target.files[0]);
+      }
+     </script>
 </html>
 

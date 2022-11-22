@@ -1,4 +1,4 @@
-#wrapper {
+/*#wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -10,7 +10,7 @@
       width: 100%;
       height: 12.5%;
       background: black;
-      transition: transform 500ms;
+      transition: transfor`m 500ms;
     }
   
     @for $i from 1 through 8 { 
@@ -22,4 +22,4 @@
 
 body:not(.hidden).reveal #loader>div {
     transform: translateX(-100%)
-}
+}*/

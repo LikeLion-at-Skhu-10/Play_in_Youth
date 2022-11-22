@@ -6,13 +6,14 @@
     <meta charset="UTF-8">
     <title>젊어서노세</title>
     <link rel="stylesheet" type="text/css" href="{% static 'posts/css/write.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/loading2.css' %}">
 </head>
 <body> 
         <div class="container">
         <h3 class="title">글 작성</h3>
         <div id="Box">      
             <div id="PhotoPlusBox">
-                <img src="{% static 'accounts/img/downloadbutton.png'%}">
+                <img id ="a" src="{% static 'accounts/img/downloadbutton.png'%}">
             </div>
                 <div class="right_bar">
                     <!-- 0815/백엔드 추가 -->
@@ -45,17 +46,6 @@
         </div>
     </ul>
 </body>
-<script>
-     function setThumbnail(event) {
-        var reader = new FileReader();
-
-        reader.onload = function(event) {
-          var img = document.createElement("img");
-          img.setAttribute("src", event.target.result);
-          document.querySelector("div#PhotoPlusBox").appendChild(img);
-        };
-
-        reader.readAsDataURL(event.target.files[0]);
-      }
-</script>
+ <script src="{% static 'posts/js/loading2.js'%}"></script>
+ <script src="{% static 'posts/js/loading.js'%}"></script>
 </html>
