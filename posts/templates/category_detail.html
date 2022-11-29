@@ -47,8 +47,8 @@
       <div class="content_imgs">
         {% for post in posts %}
         <figure onclick="change('{{post.post_content}}','{{post.cmt_postid.all}}','{{post.author}}','{{post.post_date}}')">
-          {% if image %}
-          <img src="{{post.post_img.url}}" />
+          {% if post.post_img %}
+            <img src="{{post.post_img.url}}" />
           {% endif %}
         </figure>
         {% endfor %}
