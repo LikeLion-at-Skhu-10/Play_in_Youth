@@ -16,7 +16,7 @@
   <body>
     <header>
       <div class="logoImage">
-        <a href="#"><img src="{% static 'posts/img/becomelogo.png'%}" /></a>
+        <a href="{% url 'category' %}"><img src="{% static 'posts/img/becomelogo.png'%}" /></a>
       </div>
       <div class="finder">
         <input placeholder="검색" />
@@ -25,24 +25,21 @@
       <div class="header_right">
         {% if user.is_active %} 
         <p>{{user.username}}님 안녕하세요.</p>
-        <a href="{% url 'get_write' %}">글쓰기</a>
-        <a href="{% url 'mypage' user.id %}">내 정보</a>
+        <a href="{% url 'get_write' %}">글쓰기 |</a>
+        <a href="{% url 'mypage' user.id %}">내 정보 |</a>
         <a href="{% url 'logout' %}">로그아웃</a>
         {% else %}
         <a href="{% url 'signup' %}">회원가입</a>
         <a href="{% url 'signin' %}">로그인</a>
         {% endif %} 
-        <hr>
       </div>
     </header>
 
-    <button type="button"><a href="{% url 'category' %}">뒤로가기</a></button>
-
     <content>
       <div class="content_bar">
-        <button>내 정보</button>
+        <button><a href="{% url 'mypage' user.id %}">내 정보</a></button>
         <div>#{{cate_name}} 페이지</div>
-        <button>글작성</button>
+        <button ><a href="{% url 'get_write' %}">글작성</a></button>
       </div>
       <div class="content_imgs">
         {% for post in posts %}

@@ -131,3 +131,11 @@
     width: 90%;
   }
 }
+
+.myModalContentTextText{
+  overflow-y:scroll;
+}
+
+a{
+  margin : 0;
+}

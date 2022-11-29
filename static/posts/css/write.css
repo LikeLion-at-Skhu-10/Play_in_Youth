@@ -30,7 +30,7 @@ a{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: scroll;
+    position : relative;
 }
 
 li{
@@ -85,4 +85,16 @@ p{
 }
 .container{
     min-width: 960px;
+}
+
+form button {
+    float: right
+}
+
+img {
+    position : absolute;
+    top : 0;
+    left : 0;
+    width : 100%;
+    height : 100%;
 }

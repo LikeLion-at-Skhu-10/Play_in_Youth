@@ -14,7 +14,6 @@
     margin-left: 1em;
   }
   header :nth-child(3) {
-    margin-right: 1em;
     min-width: fit-content;
   }
   .finder {
@@ -54,4 +53,7 @@
   }
   button:hover {
     cursor: pointer;
+  }
+  .content_bar a {
+    color:white;
   }

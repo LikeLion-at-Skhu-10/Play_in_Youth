@@ -13,9 +13,9 @@
   <body>
     <header>
       <div class="logoImage">
-        <a href="#"><img src="{% static 'posts/img/becomelogo.png'%}" /></a>
+        <a href="{% url 'category' %}"><img src="{% static 'posts/img/becomelogo.png'%}" /></a>
       </div>
-      <div class="header_right"><a href="#">내 정보</a> | <a href="#">로그아웃</a></div>
+      <div class="header_right"><a href="#">로그아웃</a></div>
     </header>
     <content>
       <div class="mypage_text">내 정보</div>
@@ -48,47 +48,6 @@
       </div>
       <!--Modal-->
     </content>
-
-    <h1>mypage</h1>
-    <p style="color:hotpink;">환영합니다~~^^ <b>{{user.username}}</b>님의 공간</p>
-    <hr>
-        {% if user.is_active %} 
-            <a href="{% url 'write' %}">글쓰기</a>
-            <a href="{% url 'logout' %}">로그아웃</a>
-            <hr>
-
-            <div class="my">
-              <div id="my_post">
-                <h1>작성 글</h1>
-                {% for post in post.all %}
-                    <p>카테고리 : {{post.post_cate}}</p>
-                    <p>내용 : {{post.post_content}}</p>
-                    <p>날짜 : {{post.post_date}}</p>
-                    <div>좋아요 수 : {{post.like_count}}</div>
-
-                    <a href="{% url 'edit' post.post_id %}">수정하기</a>
-                    <a href="{% url 'delete' post.post_id %}">삭제하기</a>
-                    <hr>
-                {% endfor %}
-              </div>
-
-              <div id="my_comment">
-                <h1>작성 댓글</h1>
-                {% for comment in comment.all %} 
-                  <p>내용 : {{comment.comment_content}}</p>
-                  <p>날짜 : {{comment.comment_date}}</p>
-
-                  <a href="{% url 'delete_cmt' comment.id %}">삭제하기</a>
-                  <hr>
-                {% endfor %} 
-              </div>
-            </div>
-
-        {% else %}
-            <a href="{% url 'signup' %}">회원가입</a>
-        {% endif %}
-        
-        <hr>
     <script type="text/javascript" src="{% static 'accounts/js/index.js' %}"></script>
   </body>
 </html>
