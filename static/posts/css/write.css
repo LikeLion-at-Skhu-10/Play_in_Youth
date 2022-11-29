@@ -1,19 +1,17 @@
 *{
     padding : 0;
     margin : 0;
-
 }
 #Box {
     display : flex;
     background-color: whitesmoke;
-    height: 31.5em;
-    width: 52.8em;
+    height: 35em;
+    width: 60em;
     margin : auto;
     border-radius: 0.5em;
 }
-
 .title{
-    text-align :center;    
+    text-align: center;    
     font-size: 2.5em;
     padding: 1em 0;
 }
@@ -25,13 +23,14 @@ a{
 #PhotoPlusBox{
     border:2px dashed black;
     background-color: white;
-    height: 27em;
+    height: 28em;
     width: 19em;
     margin:1.5em;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: scroll;
 }
 
 li{

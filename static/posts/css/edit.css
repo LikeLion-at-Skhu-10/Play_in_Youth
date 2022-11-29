@@ -1,19 +1,18 @@
 *{
     padding : 0;
     margin : 0;
-
 }
 #Box {
     display : flex;
     background-color: whitesmoke;
-    height: 31.5em;
-    width: 52.8em;
+    height: 35em;
+    width: 60em;
     margin : auto;
     border-radius: 0.5em;
 }
 
 .title{
-    text-align :center;    
+    text-align: center;    
     font-size: 2.5em;
     padding: 1em 0;
 }
@@ -86,4 +85,44 @@ p{
 }
 .container{
     min-width: 960px;
+}
+
+.post_img{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.post_img img {
+    
+    display: block;
+    height: auto;
+}
+
+textarea{
+    border: 1px solie black
+}
+.edit_title{
+    text-align: center;
+    font-size : 3em;
+}
+.myformClass{
+    width : 60%;
+    display:flex;
+    flex-direction: column;
+}
+.entire_wrapper{
+    background-color: whitesmoke;
+    width: 70vw;
+    margin : 0 auto;
+    display : flex;
+    min-width : fit-content;    
+    justify-content: space-around; 
+}
+button {
+    float : right;
+}
+.post_content{
+    width: fit-content;
+    min-width: fit-content;
 }
